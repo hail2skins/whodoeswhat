@@ -30,11 +30,26 @@ gem 'redis', '~> 3.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#bootstrap
 gem 'bootstrap', '~> 4.0.0.alpha3'
 
+#also bootstrap but for tether whatever that means
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
+
+#easy forms
+gem 'simple_form'
+
+#styling and markdown
+gem "pygments.rb"
+gem "redcarpet"
+
+#know your models
+gem "annotate"
+
+#log in right
+gem 'devise', git: 'git@github.com:plataformatec/devise.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
