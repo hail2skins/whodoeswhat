@@ -16,7 +16,7 @@ class SigningInTest < ActionDispatch::IntegrationTest
     
     fill_in "Email", with: login_user.email
     fill_in "Password", with: "password"
-    click_button "Log in"
+    click_button "Sign in"
     
     check_content "Signed in successfully.",
                   "Signed in as #{login_user.email}"
