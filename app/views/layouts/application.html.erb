@@ -16,7 +16,12 @@
   </head>
   <body>
   <%= render 'layouts/navbar' %>  
+  <%= render 'layouts/sidebar' %>
+  <%= render 'layouts/messages' %>
     
     <%= yield %>
+  <%= render 'layouts/footer' %>
+  <%= render 'layouts/modal' %>
+  <%= debug(params) if Rails.env.development? %>
   </body>
 </html>

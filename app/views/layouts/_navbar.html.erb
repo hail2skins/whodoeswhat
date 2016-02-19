@@ -3,21 +3,37 @@
   <button class="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
   ☰
   </button>
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Who Does What</a>
   <div class="collapse navbar-toggleable-xs" id="collapsingNavbar">
-      <ul class="nav navbar-nav pull-right">
+      <ul class="nav navbar-nav pull-left">
           <li class="nav-item active">
               <a class="nav-link" href="#">Home <span class="sr-only">Home</span></a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="#features">Features</a>
           </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#myAlert" data-toggle="collapse">Wow</a>
-          </li>
+          <% unless user_signed_in? %>
+            <li class="<%= "active" if current_page?("/users/sign_up") %> nav-item">
+              <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+            </li>
+            <li class="<%= "active" if current_page?("/users/sign_in") %> nav-item">
+              <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
           <li class="nav-item">
               <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
           </li>
       </ul>
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav pull-right">
+          <li class="nav-item">
+            <%= link_to "Signed in as #{current_user.email}", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        </ul>
+    
+      <% end %>
   </div>
 </nav>

@@ -24,5 +24,7 @@ end
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
   #include Capybara::Assertions
+  include Warden::Test::Helpers
+  
 
 end
