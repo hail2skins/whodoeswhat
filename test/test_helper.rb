@@ -7,8 +7,7 @@ Capybara.javascript_driver = :poltergeist
 
 require "minitest/reporters"
 reporter_options = { color: true }
-Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, 
-                          Minitest::Reporters::DefaultReporter.new(reporter_options)]
+Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in test/support/ and its subdirectories.
@@ -19,6 +18,10 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+end
+
+class ActionController::TestCase
+  include Devise::TestHelpers
 end
 
 class ActionDispatch::IntegrationTest

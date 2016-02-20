@@ -12,7 +12,7 @@ class SigningInTest < ActionDispatch::IntegrationTest
   
   test "with valid credentials" do
     visit "/"
-    click_link "Sign in"
+    first(:link, "Sign in").click
     
     fill_in "Email", with: login_user.email
     fill_in "Password", with: "password"

@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class WelcomeControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+
+#  test "root page visible" do
+#    get :index
+#  end
+
 end

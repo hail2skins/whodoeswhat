@@ -59,7 +59,10 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'capybara'
   gem 'minitest-reporters'
+  gem 'minitest-rails', git: "https://github.com/blowmage/minitest-rails.git", branch: "rails5"
+  gem 'minitest-rails-capybara', git: 'https://github.com/blowmage/minitest-rails-capybara.git', branch: 'rails5'
 end
+
 
 
 group :development do
@@ -67,6 +70,7 @@ group :development do
   gem 'web-console', '~> 3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rails-erd'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
