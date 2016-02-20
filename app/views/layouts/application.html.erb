@@ -2,7 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Who Does What</title>
+    <title>
+    <% if content_for?(:title) %>
+      <%= yield(:title) %>
+    <% else %>
+      Who Does What
+    <% end %>
+    </title>
     <meta name="description" content="A admin dashboard theme that will get you started with Bootstrap 4." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Codeply">

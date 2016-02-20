@@ -16,7 +16,7 @@ class UsersControllerTest < ActionController::TestCase
   
 
   test "should get show" do
-    get :show, id: User.first
+    get :show, params: { id: login_user.id }
     assert_response :success
   end
 

@@ -10,6 +10,12 @@
     end
   end
   
+  def refute_content(*args)
+    args.each do |arg|
+      refute page.has_content?(arg), "Refute -- #{arg} is available, but shouldn't be."
+    end
+  end
+  
   def check_something(something, *args)
     args.each do |arg|
       if something == "link"
