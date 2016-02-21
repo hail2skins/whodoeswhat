@@ -14,3 +14,7 @@ login_user:
 # column: value
   email: 'login@user.com'
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  
+group_user: 
+  email: 'group@user.com'
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

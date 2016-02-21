@@ -35,7 +35,7 @@ class CreateGroupTest < ActionDispatch::IntegrationTest
                    "Group Count: 0"
     check_content "Group Count: 1",
                   "Successfully created an association."
-    check_links "Group Count: 1",
+    check_links "1",
                 "Create new association"
   end
   

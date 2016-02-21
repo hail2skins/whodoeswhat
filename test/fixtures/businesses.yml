@@ -1,8 +1,6 @@
 # Read about fixtures at
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
+group_business:
+  name: Group Business
 
-two:
-  name: MyString
