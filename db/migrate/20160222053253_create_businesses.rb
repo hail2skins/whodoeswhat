@@ -5,6 +5,5 @@ class CreateBusinesses < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :businesses, :name
   end
 end

@@ -23,7 +23,6 @@ class ReadGroupTest < ActionDispatch::IntegrationTest
   end
   
   test "view a group linked to a user and business" do
-    puts page.body
     check_content "#{group_business.name} Admin",
                   "#{group_business.name}"
     check_links "#{group_business.name} Admin",
@@ -31,6 +30,7 @@ class ReadGroupTest < ActionDispatch::IntegrationTest
     click_link "#{group_business.name} Admin"
     
     assert_equal business_group_path(group_business, group_one), current_path
+    assert_title group_one.name
     
   end
   

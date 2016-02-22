@@ -1,0 +1,67 @@
+<%= provide(:title, @group.name) %>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <%= @group.name + " Information"%> 
+                <%= link_to "Delete Group", '#', class: "pull-right", method: :delete, data:
+        										  { confirm: 'Are you sure?' } %>
+            </div>
+            <div class="card-block">
+              <div class="row">
+                
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-group-information">
+                    <tbody>
+                      <tr>
+                        <td>Group Name:</td>
+                        <td><%= @group.name %> </td>
+                      </tr>
+                      <tr>
+                        <td>Associated Business:</td>
+                        <td><%= link_to @business.name, '#' %></td>
+                      </tr>
+                      <tr>
+                        <td>Associated User Count:</td>
+                        <td><%= @group.users.count %></td>
+                      </tr>
+                    </tbody>
+                  </table>
+              
+                  <%= link_to 'PLACEHOLDER', '#', class: 'btn btn-primary' %>
+                  
+                </div>
+             
+            </div>
+              <% if current_user.groups.any? %>   
+                <div class="panel-footer">
+                  <%= link_to "Create new group", '#', class: "pull-right" %>      
+                </div>
+              <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-hover">
+          <thead>
+             <tr>
+              <th>User</th>
+              <th>Placeholder</th>
+              <th>Placeholder</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @group.users.each do |user| %>
+            <tr>
+              <td><%= link_to user.email, [user] %></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <% end %>
+          </tbody>
+
+        </table>
+    </div>                
+
+  </div>

@@ -2,6 +2,7 @@
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 group_one:
-  user: group_user
-  business: group_business
   name: "Group Business Admin"
+  description: "Whatever"
+  business: group_business
+

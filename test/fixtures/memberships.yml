@@ -1,6 +1,6 @@
 # Read about fixtures at
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-group_business:
-  name: "Group Business"
-
+one:
+  user: group_user
+  group: group_one

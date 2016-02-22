@@ -62,8 +62,8 @@
           <tbody>
             <% @user.groups.each do |group| %>
             <tr>
-              <td><%= link_to group.name, [group.business, group] %></td>
-              <td><%= link_to group.business.name, [group.business] %></td>
+              <td><%= link_to group.name.titleize, [group.business, group] %></td>
+              <td><%= link_to group.business.name.titleize, [group.business] %></td>
             </tr>
             <% end %>
           </tbody>
