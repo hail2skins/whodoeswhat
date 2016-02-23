@@ -30,9 +30,8 @@ class CreateGroupTest < ActionDispatch::IntegrationTest
     click_button "Create business"
     
     assert_equal user_path(login_user), current_path
-    refute_content "You are not associated with any businesses.",
-                   "Click here to create an association.",
-                   "Group Count: 0"
+    refute_content "You are not associated with any businesses."
+    refute_links "Click here to create an association."
     check_content "Group Count: 1",
                   "Successfully created an association."
     check_links "1",

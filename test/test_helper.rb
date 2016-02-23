@@ -3,6 +3,8 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
 require 'capybara/poltergeist'
+require 'minitest/rails'
+require 'minitest/rails/capybara'
 Capybara.javascript_driver = :poltergeist
 
 require "minitest/reporters"
@@ -26,7 +28,7 @@ end
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
-  #include Capybara::Assertions
+  include Capybara::Assertions
   include Warden::Test::Helpers
   
 
