@@ -3,7 +3,6 @@ require "test_helper"
 class CreateArticlesTest < ActionDispatch::IntegrationTest
   def setup
     login_as(login_user)
-    visit "/"
   end
   
   def teardown
@@ -18,7 +17,8 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     Business.find_by(name: "Load First Business")
   end
   
-  test "create first article" do
+  test "create first article from kb article page" do
+    visit "/"
     refute_links "KB - "
     #from load.rb to create business, group and membership
     load_first_group_business
@@ -27,7 +27,57 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     click_link "KB - #{load_business.name}"
     
     assert_equal business_articles_path(load_business), current_path
+    assert_title "KB - #{load_business.name}"
+    check_content "Please write an article capturing knowledge to begin."
+    check_links "Click here to create an article.",
+                "Return to main page"
+    click_link "Click here to create an article."
+    
+    assert_equal new_business_article_path(load_business, Article.new), current_path
+    assert_title "Create Knowledge"
+    fill_in "Name", with: "First article testing"
+    fill_in "Content", with: "Content is kind of a big deal.  I am kind of a big deal too."
+    click_button "Create article"
+    
+    assert_equal business_articles_path(load_business), current_path
+    assert_css "table.table-kb-information"
+    within(".table-kb-information") do
+      check_content "Name",
+                    "Content",
+                    "Last touched",
+                    Time.now.strftime("%m/%d/%Y"),
+                    "First article testing"
+    end
     
     
   end
+  
+  test "create second article from KB index" do
+    load_first_group_business
+    Article.create!(name: "Second article.", 
+                    content: "I am so super cool it's NUTS.  Seriously, I am.   Totally.",
+                    business_id: load_business.id)
+    visit "/"
+    click_link "KB - #{load_business.name}"
+    check_links "Create new article"
+    click_link "Create new article"
+    
+    assert_equal new_business_article_path(load_business, Article.new), current_path
+    fill_in "Name", with: "Second bitching article"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    click_button "Create article"
+    
+    check_content "Second bitching article",
+                  "I want this to work.
+                   I need this to work.
+                   I will make it work.
+                   I demand it to work.
+                   Or..."
+    
+  end
+  
 end

@@ -1,0 +1,8 @@
+<%= simple_form_for([@business, @article]) do |f| %>
+  <%= f.error_notification %>
+  
+  <%= f.input :name %>
+  <%= f.input :content %>
+
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
