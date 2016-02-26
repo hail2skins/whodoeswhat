@@ -36,7 +36,8 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     assert_equal new_business_article_path(load_business, Article.new), current_path
     assert_title "Create Knowledge"
     fill_in "Name", with: "First article testing"
-    fill_in "Content", with: "Content is kind of a big deal.  I am kind of a big deal too."
+    fill_in "Content", with: "I have to test 20 words or this will not work how I want so I am typing a lot here to make sure I am over 20 words and that's all I'm doing"
+
     click_button "Create article"
     
     assert_equal business_articles_path(load_business), current_path
@@ -54,8 +55,8 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   
   test "create second article from KB index" do
     load_first_group_business
-    Article.create!(name: "Second article.", 
-                    content: "I am so super cool it's NUTS.  Seriously, I am.   Totally.",
+    Article.create!(name: "Second article", 
+                    content: "I have to test 20 words or this will not work how I want so I am typing a lot here to make sure I am over 20 words and that's all I'm doing",
                     business_id: load_business.id)
     visit "/"
     click_link "KB - #{load_business.name}"
@@ -78,6 +79,16 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                    I demand it to work.
                    Or..."
     
+  end
+  
+  test "fail to create article without name and content" do
+    load_first_group_business
+    visit new_business_article_path(load_business, Article.new)
+    
+    click_button "Create article"
+    check_content "Please review the problems below:",
+                  "can't be blank",
+                  "your content must be at least 20 words"
   end
   
 end

@@ -15,3 +15,7 @@
 one:
   user: group_user
   group: group_one
+  
+article_membership:
+  user: article_user
+  group: article_group

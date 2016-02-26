@@ -12,8 +12,10 @@
 
 class ArticlesController < ApplicationController
   before_action :get_business
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
   
   def index
+    @articles = @business.articles.all
   end
   
   def new
@@ -27,9 +29,12 @@ class ArticlesController < ApplicationController
       if @article.save
         format.html { redirect_to business_articles_path(@business), notice: "Knowledge created." }
       else
-        format.html { render action 'new' }
+        format.html { render 'new' }
       end
     end
+  end
+  
+  def show
   end
   
   
@@ -37,6 +42,10 @@ class ArticlesController < ApplicationController
   private
     def get_business
       @business = Business.find(params[:business_id])
+    end
+    
+    def set_article
+      @article = @business.articles.find(params[:id])
     end
     
     def article_params

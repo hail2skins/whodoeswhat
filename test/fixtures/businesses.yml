@@ -13,4 +13,7 @@
 
 group_business:
   name: "Group Business"
+  
+article_business:
+  name: "Article Business"
 

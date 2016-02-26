@@ -2,7 +2,9 @@
   <%= f.error_notification %>
   
   <%= f.input :name %>
-  <%= f.input :content %>
+  <%= f.input :content, error: :content_count %>
+  <%= f.error :content_count %><br />
+  
 
   <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>

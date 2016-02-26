@@ -7,6 +7,10 @@ body, html {
   height:100%;
 }
 
+pre {
+  background: #f2f2f2;
+}
+
 /* workaround modal-open padding issue */
 body.modal-open {
     padding-right:0 !important;

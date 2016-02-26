@@ -37,3 +37,7 @@ login_user:
 group_user: 
   email: 'group@user.com'
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  
+article_user:
+  email: 'article@user.com'
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

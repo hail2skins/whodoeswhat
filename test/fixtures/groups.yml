@@ -17,4 +17,9 @@ group_one:
   name: "Group Business Admin"
   description: "Whatever"
   business: group_business
+  
+article_group:
+  name: "Article Business Admin"
+  description: "Nothing interesting"
+  business: article_business
 

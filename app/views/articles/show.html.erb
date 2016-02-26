@@ -1,0 +1,16 @@
+<%= provide(:title, "KB - #{@article.name}") %>
+
+<div class="col-md-6">
+  <%= link_to "Back to article index", business_articles_path(@business) %> <br />
+  <%= link_to "Back to main page", current_user %> <br />
+  <%= link_to "Create new article", new_business_article_path(@business, Article.new) %>
+  <div class="card">
+    <div class="card-header">
+      <%= @article.name %>
+    </div>
+    <div class="card-block">
+      <%= markdown(@article.content) %>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>

@@ -43,7 +43,7 @@ gem 'simple_form'
 
 #styling and markdown
 gem "pygments.rb"
-gem "redcarpet"
+gem "redcarpet", git: "https://github.com/vmg/redcarpet.git"
 
 #know your models
 gem "annotate"

@@ -17,10 +17,10 @@
         </tr>
       </thead>
       <tbody>
-        <% @business.articles.each do |article| %>
+        <% @articles.each do |article| %>
         <tr>
-          <td><%= article.name %></td>
-          <td colspan="2"><%= article.content.split[0..20].join(" ") + "..." %></td>
+          <td><%= link_to article.name, business_article_path(@business, article) %></td>
+          <td colspan="2"><%= markdown(article.content.split[0..20].join(" ") + "...") %></td>
           <td><%= article.updated_at.strftime("%m/%d/%Y") %></td>
           <td>Edit</td>
           <td>Delete</td>
