@@ -37,6 +37,20 @@ class ArticlesController < ApplicationController
   def show
   end
   
+  def edit
+  end
+  
+  def update
+    if @article.update(article_params)
+      flash[:notice] = "Article has been updated."
+      redirect_to [@business, @article]
+    else
+      flash.now[:alert] = "Article has not been updated."
+      render "edit"
+    end
+  end
+    
+  
   
   
   private

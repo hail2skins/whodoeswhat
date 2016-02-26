@@ -5,8 +5,8 @@
   <%= link_to "Back to main page", current_user %> <br />
   <%= link_to "Create new article", new_business_article_path(@business, Article.new) %>
   <div class="card">
-    <div class="card-header">
-      <%= @article.name %>
+    <div class="card-header clearfix">
+      <%= @article.name %> <%= link_to "Edit", [:edit, @business, @article], class: 'btn btn-primary pull-right' %>
     </div>
     <div class="card-block">
       <%= markdown(@article.content) %>
