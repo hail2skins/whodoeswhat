@@ -6,7 +6,13 @@
   <%= link_to "Create new article", new_business_article_path(@business, Article.new) %>
   <div class="card">
     <div class="card-header clearfix">
-      <%= @article.name %> <%= link_to "Edit", [:edit, @business, @article], class: 'btn btn-primary pull-right' %>
+      <%= @article.name %> 
+      <%= link_to "Delete", business_article_path(@business, @article), 
+                                    method: :delete,
+                                    data: { confirm: "Are you sure you want to delete this task?" },
+                                    class: "btn btn-danger pull-right" %>
+      <%= link_to "Edit", [:edit, @business, @article], class: 'btn btn-primary pull-right' %>
+ 
     </div>
     <div class="card-block">
       <%= markdown(@article.content) %>
