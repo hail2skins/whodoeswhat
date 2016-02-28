@@ -45,6 +45,9 @@ gem 'simple_form'
 gem "pygments.rb"
 gem "redcarpet", git: "https://github.com/vmg/redcarpet.git"
 
+#authorization
+gem "pundit"
+
 #know your models
 gem "annotate"
 
