@@ -16,6 +16,7 @@ class ArticlesController < ApplicationController
   
   def index
     @articles = @business.articles.all
+    authorize @business
   end
   
   def new
