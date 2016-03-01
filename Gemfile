@@ -64,6 +64,7 @@ group :development, :test do
   gem 'minitest-reporters'
   gem 'minitest-rails', git: "https://github.com/blowmage/minitest-rails.git", branch: "rails5"
   gem 'minitest-rails-capybara', git: 'https://github.com/blowmage/minitest-rails-capybara.git', branch: 'rails5'
+  gem 'policy-assertions'
 end
 
 

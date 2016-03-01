@@ -5,6 +5,7 @@ require 'capybara/rails'
 require 'capybara/poltergeist'
 require 'minitest/rails'
 require 'minitest/rails/capybara'
+require 'policy_assertions'
 Capybara.javascript_driver = :poltergeist
 
 require "minitest/reporters"
