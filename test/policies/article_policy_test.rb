@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ArticlePolicyTest < ActiveSupport::TestCase
+class ArticlePolicyTest < PolicyAssertions::Test
 
   def test_scope
   end
@@ -15,5 +15,9 @@ class ArticlePolicyTest < ActiveSupport::TestCase
   end
 
   def test_destroy
+  end
+  
+  def test_index
+    refute_permit nil, Article
   end
 end

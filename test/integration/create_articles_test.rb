@@ -91,5 +91,4 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                   "your content must be at least 20 words"
   end
   
-
 end
