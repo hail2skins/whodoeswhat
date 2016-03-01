@@ -19,5 +19,7 @@ class ArticlePolicyTest < PolicyAssertions::Test
   
   def test_index
     refute_permit nil, Article
+    refute_permit users(:login_user), 
   end
+  
 end

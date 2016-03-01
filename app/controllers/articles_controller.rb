@@ -21,10 +21,12 @@ class ArticlesController < ApplicationController
   
   def new
     @article = @business.articles.build
+    authorize @business
   end
   
   def create
     @article = @business.articles.build(article_params)
+    authorize @business
     
     respond_to do |format|
       if @article.save
@@ -36,6 +38,7 @@ class ArticlesController < ApplicationController
   end
   
   def show
+    authorize @business
   end
   
   def edit

@@ -8,4 +8,16 @@ class BusinessPolicy < ApplicationPolicy
   def index?
     record.groups.find_by(name: "#{record.name} Admin").memberships.exists?(user_id: user)
   end
+  
+  def show?
+    index?
+  end
+  
+  def new?
+    index?
+  end
+  
+  def create?
+    index?
+  end
 end
