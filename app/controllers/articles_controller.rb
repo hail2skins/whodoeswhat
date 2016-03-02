@@ -42,9 +42,11 @@ class ArticlesController < ApplicationController
   end
   
   def edit
+    authorize @business
   end
   
   def update
+    authorize @business
     if @article.update(article_params)
       flash[:notice] = "Article has been updated."
       redirect_to [@business, @article]
