@@ -11,11 +11,11 @@
 #
 class Article < ApplicationRecord
   validates :name, presence: true
-  validates_length_of :content_count, minimum: 20, too_short: "your content must be at least 20 words"
-  
+  validates_length_of :content, minimum: 20, too_short: "your content must be at least 20 words"
   
   belongs_to :business
 
+  mount_uploader :attachment, AttachmentUploader
 
   private
     def content_count

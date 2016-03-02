@@ -40,6 +40,9 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
 
     click_button "Create article"
     
+    assert_equal business_article_path(load_business, Article.find_by(name: "First article testing")), current_path
+    click_link "Back to article index"
+    
     assert_equal business_articles_path(load_business), current_path
     assert_css "table.table-kb-information"
     within(".table-kb-information") do
@@ -72,6 +75,8 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               Or I shall die."
     click_button "Create article"
     
+    click_link "Back to article index"
+    
     check_content "Second bitching article",
                   "I want this to work.
                    I need this to work.
@@ -83,12 +88,31 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   
   test "fail to create article without name and content" do
     load_first_group_business
-    visit new_business_article_path(load_business, Article.new)
+    visit new_business_article_path(load_business)
     
     click_button "Create article"
     check_content "Please review the problems below:",
                   "can't be blank",
                   "your content must be at least 20 words"
+  end
+
+  test "create with an attachment" do
+    load_first_group_business
+    visit new_business_article_path(load_business, Article.new)
+    fill_in "Name", with: "Attachment test"
+    fill_in "Content", with: "I want this to work.
+                              I need this to work.
+                              I will make it work.
+                              I demand it to work.
+                              Or I shall die."
+    Capybara.ignore_hidden_elements = false
+    attach_file "File", "test/files/speed.txt"
+    Capybara.ignore_hidden_elements = true
+    click_button "Create article"
+    
+    within(".attachment") do
+      check_content "speed.txt"
+    end
   end
   
 end

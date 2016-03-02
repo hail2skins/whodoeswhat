@@ -48,6 +48,9 @@ gem "redcarpet", git: "https://github.com/vmg/redcarpet.git"
 #authorization
 gem "pundit"
 
+#file uploads
+gem "carrierwave"
+
 #know your models
 gem "annotate"
 

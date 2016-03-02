@@ -30,7 +30,7 @@ class ArticlesController < ApplicationController
     
     respond_to do |format|
       if @article.save
-        format.html { redirect_to business_articles_path(@business), notice: "Knowledge created." }
+        format.html { redirect_to [@business, @article], notice: "Knowledge created." }
       else
         format.html { render 'new' }
       end
@@ -75,6 +75,6 @@ class ArticlesController < ApplicationController
     end
     
     def article_params
-      params.require(:article).permit(:name, :content)
+      params.require(:article).permit(:name, :content, :attachment)
     end
 end

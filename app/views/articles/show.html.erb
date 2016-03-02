@@ -20,3 +20,15 @@
     </div>
   </div>
 </div>
+
+<div class="col-md-5">
+  <% if @article.attachment.present? %>
+    <h4>Attachment</h4>
+    <div class="attachment">
+      <p>
+        <%= link_to File.basename(@article.attachment.url), @article.attachment.url %>
+        (<%= number_to_human_size(@article.attachment.size) %>)
+      </p>
+    </div>
+  <% end %>
+</div>
