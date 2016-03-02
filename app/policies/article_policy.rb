@@ -7,18 +7,26 @@ class ArticlePolicy < ApplicationPolicy
         raise Pundit::NotAuthorizedError
       end
     end
-    
-    def business
-      @business = Business.find(business.id)
-    end
   end
 
   def show?
-    record.business.groups.find_by(name: "#{record.business.name} Admin").memberships.exists?(user_id: user)
+    Pundit.policy!(user, record.business).show?
   end
   
   def index?
-    record.first.business.groups.find_by(name: "#{record.first.business.name} Admin").memberships.exists?(user_id: user)
+    Pundit.policy!(user, record.first.business).index?
+  end
+  
+  def create?
+    show?
+  end
+  
+  def update?
+    show?
+  end
+  
+  def destroy?
+    show?
   end
   
 
