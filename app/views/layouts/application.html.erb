@@ -18,7 +18,6 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
 
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
   </head>
   <body>
   <%= render 'layouts/navbar' %>  
@@ -27,7 +26,6 @@
     
     <%= yield %>
   <%= render 'layouts/footer' %>
-  <%= render 'layouts/modal' %>
   <%= debug(params) if Rails.env.development? %>
   </body>
 </html>

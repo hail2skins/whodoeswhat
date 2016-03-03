@@ -31,7 +31,8 @@ gem 'redis', '~> 3.0'
 # gem 'capistrano-rails', group: :development
 
 #bootstrap
-gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'bootstrap-sass'
+gem "font-awesome-rails"
 
 #also bootstrap but for tether whatever that means
 source 'https://rails-assets.org' do

@@ -1,30 +1,22 @@
 <%= provide(:title, @user.email) %>
 
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
           <% if current_user.groups.empty? %>
-            <div class="card card-inverse card-danger text-xs-center">
-              <div class="card-block">
-                <blockquote class="card-blockquote">
-                  <p>You are not associated with any businesses.</p>
-                <footer><%= link_to "Click here to create an association.", new_business_path(@business) %></footer>
-                </blockquote>
-              </div>
-            </div>
+            <div class="panel panel-danger">
+              <div class="panel-heading">You are not associated with any businesses.</div>
+              <footer><%= link_to "Click here to create an association.", new_business_path(@business) %></footer>
+             </div>
           <% end %>
-   
-   
-          <div class="card">
-            <div class="card-header">
+          
+          <div class="panel panel-primary">
+            <div class="panel-heading clearfix">
               <%= "#{@user.email} Profile" %> 
-                <%= link_to "Delete User", '#', class: "pull-right", method: :delete, data:
+                <%= link_to "Delete User", '#', class: "delete pull-right", method: :delete, data:
         										  { confirm: 'Are you sure?' } %>
             </div>
-            <div class="card-block">
-              <div class="row">
-                
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
+            <div class="panel-body">
+              <table class="table table-user-information">
                     <tbody>
                       <tr>
                         <td>Email:</td>
@@ -36,19 +28,13 @@
                       </tr>
                     </tbody>
                   </table>
-              
-                  <%= link_to 'PLACEHOLDER', '#', class: 'btn btn-primary' %>
-                  
-                </div>
-             
             </div>
-              <% if current_user.groups.any? %>   
-                <div class="panel-footer">
-                  <%= link_to "Create new association", new_business_path(@business), class: "pull-right" %>      
-                </div>
-              <% end %>
+            <div class="panel-footer clearfix">
+              <%= link_to "Create new association", new_business_path(@business), class: "pull-right" %>      
+
+            </div>
           </div>
-        </div>
+         
       </div>
           
       <div class="col-md-6">
