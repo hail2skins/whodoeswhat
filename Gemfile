@@ -51,6 +51,8 @@ gem "pundit"
 #know your models
 gem "annotate"
 
+gem "carrierwave"
+
 #log in right
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 
