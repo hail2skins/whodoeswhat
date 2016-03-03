@@ -75,6 +75,6 @@ class ArticlesController < ApplicationController
     end
     
     def article_params
-      params.require(:article).permit(:name, :content, :attachment)
+      params.require(:article).permit(:name, :content, :attachment, :attachment_cache)
     end
 end

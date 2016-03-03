@@ -3,9 +3,11 @@
   
   <%= f.input :name %>
   <%= f.input :content, error: :content_count %>
+  <%= f.error :content_count %><br />
 
 
   <%= f.input :attachment, as: :file, label: "File" %> 
+  <%= f.input :attachment_cache, as: :hidden %>
   
 
   <%= f.button :submit, class: "btn btn-primary" %>

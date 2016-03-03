@@ -115,4 +115,25 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     end
   end
   
+  test "persist file upload after errors" do
+    load_first_group_business
+    visit new_business_article_path(load_business)
+    Capybara.ignore_hidden_elements = false
+    attach_file "File", "test/files/speed.txt"
+    Capybara.ignore_hidden_elements = true
+    click_button "Create article"
+    
+    fill_in "Name", with: "Persist across errors"
+    fill_in "Content", with: "I want this to work.
+                              I need this to work.
+                              I will make it work.
+                              I demand it to work.
+                              Or I shall die."
+    click_button "Create article"
+    
+    within(".attachment") do
+      check_content "speed.txt"
+    end
+  end
+  
 end
