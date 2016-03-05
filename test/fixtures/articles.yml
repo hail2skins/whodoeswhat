@@ -22,5 +22,9 @@ article_two:
   name: "Second article"
   content: "I have to test 20 words or this will not work how I want so I am typing a lot here to make sure I am over 20 words and that's all I'm doing."
   business: article_business
-
+  
+attachment_article:
+  name: "Attachment article"
+  content: "I have to test 20 words or this will not work how I want so I am typing a lot here to make sure I am over 20 words and that's all I'm doing."
+  business: attachment_business
 

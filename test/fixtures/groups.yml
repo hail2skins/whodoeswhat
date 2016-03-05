@@ -22,4 +22,10 @@ article_group:
   name: "Article Business Admin"
   description: "Nothing interesting"
   business: article_business
+  
+attachment_group:
+  name: "Attachment Business Admin"
+  description: "Nothing interesting"
+  business: attachment_business
+
 

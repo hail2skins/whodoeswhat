@@ -19,3 +19,7 @@ one:
 article_membership:
   user: article_user
   group: article_group
+  
+attachment_membership:
+  user: attachment_user
+  group: attachment_group

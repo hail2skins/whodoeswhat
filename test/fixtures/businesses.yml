@@ -16,4 +16,8 @@ group_business:
   
 article_business:
   name: "Article Business"
+  
+attachment_business:
+  name: "Attachment Business"
+
 

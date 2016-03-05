@@ -32,5 +32,7 @@ class ActionDispatch::IntegrationTest
   include Capybara::Assertions
   include Warden::Test::Helpers
   
+  CarrierWave.root = 'test/fixtures/files'
+  
 
 end

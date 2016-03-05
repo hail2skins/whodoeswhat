@@ -25,6 +25,20 @@ def article_two
   articles(:article_two)
 end
 
+def article_three
+  Article.find_by(name: "View attachments")
+end
+
+def attach_test_file
+  visit edit_business_article_path(article_business, article_two)
+  attach_file "File #1", "test/files/speed.txt"
+  click_button "Update article"
+end
+
+def attachment_one
+  article_three.attachments.find_by(file: "speed.txt")
+end
+
 
 test "show an article from article index" do
   visit "/"
@@ -57,6 +71,25 @@ test "check all links" do
   
   assert_equal new_business_article_path(article_business, Article.new), current_path
 
+end
+
+test "users can view an article's attached files" do
+  visit new_business_article_path(article_business)
+  fill_in "Name", with: "View attachments"
+  fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+  attach_file "File #1", "test/files/speed.txt"
+  click_button "Create article" 
+ 
+  visit business_article_path(article_business, article_three)
+  click_link "speed.txt"
+  
+  assert_equal attachment_path(attachment_one), current_path
+  check_content "The blink tag can blink faster"
+  visit root_path
 end
 
 

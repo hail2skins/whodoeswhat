@@ -1,10 +1,7 @@
 # Read about fixtures at
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  file: MyString
-  article: 
+attachment_one:
+  file: 'speed.txt'
+  article: attachment_article
 
-two:
-  file: MyString
-  article: 

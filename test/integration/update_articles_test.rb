@@ -66,8 +66,7 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     click_button "Update article"
     
     check_content "Article has not been updated",
-                  "Please review the problems below:",
                   "can't be blank",
-                  "your content must be at least 20 words"
+                  "your content must be at least 50 characters"
   end
 end
