@@ -1,0 +1,4 @@
+<%= f.simple_fields_for :attachments do |ff| %>
+  <%= ff.input :file, as: :file, label: "File ##{ff.index + 1}" %>
+  <%= ff.input :file_cache, as: :hidden %>
+<% end %>

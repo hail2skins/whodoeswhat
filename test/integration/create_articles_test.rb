@@ -40,6 +40,10 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
 
     click_button "Create article"
     
+    assert_equal business_article_path(load_business, Article.find_by(name: "First article testing")), current_path
+    
+    click_link "Back to article index"
+    
     assert_equal business_articles_path(load_business), current_path
     assert_css "table.table-kb-information"
     within(".table-kb-information") do
@@ -72,6 +76,8 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               Or I shall die."
     click_button "Create article"
     
+    click_link "Back to article index"
+    
     check_content "Second bitching article",
                   "I want this to work.
                    I need this to work.
@@ -86,9 +92,66 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     visit new_business_article_path(load_business, Article.new)
     
     click_button "Create article"
-    check_content "Please review the problems below:",
-                  "can't be blank",
-                  "your content must be at least 20 words"
+    check_content "can't be blank",
+                  "your content must be at least 50 characters"
   end
+
+  test "with an attachment" do
+    load_first_group_business
+    visit new_business_article_path(load_business)
+    fill_in "Name", with: "Attachment test"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    attach_file "File #1", "test/files/speed.txt"
+    click_button "Create article"
+    
+    within(".attachments") do
+      check_content "speed.txt"
+    end
+  end
+  
+  test "persisting file uploads across form displays" do
+    load_first_group_business
+    visit new_business_article_path(load_business)
+    attach_file "File #1", "test/files/speed.txt"
+    click_button "Create article"
+    
+    fill_in "Name", with: "Persistence test"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    click_button "Create article"
+    
+    within(".attachments") do
+      check_content "speed.txt"
+    end
+  end  
+  
+  test "with multiple attachments" do
+    load_first_group_business
+    visit new_business_article_path(load_business)
+    fill_in "Name", with: "Multiple attachments"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    attach_file "File #1", Rails.root.join("test/files/speed.txt")
+    attach_file "File #2", Rails.root.join("test/files/spin.txt")
+    attach_file "File #3", Rails.root.join("test/files/gradient.txt")
+    click_button "Create article"
+    
+    within(".attachments") do
+      check_content "speed.txt",
+                    "spin.txt",
+                    "gradient.txt"
+    end
+  end
+  
   
 end

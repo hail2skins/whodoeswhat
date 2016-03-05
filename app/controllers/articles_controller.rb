@@ -22,15 +22,16 @@ class ArticlesController < ApplicationController
   def new
     @article = @business.articles.build
     authorize @business
+    3.times { @article.attachments.build }
   end
   
   def create
-    @article = @business.articles.build(article_params)
+    @article = @business.articles.new(article_params)
     authorize @business
     
     respond_to do |format|
       if @article.save
-        format.html { redirect_to business_articles_path(@business), notice: "Knowledge created." }
+        format.html { redirect_to business_article_path(@business, @article), notice: "Knowledge created." }
       else
         format.html { render 'new' }
       end
@@ -75,6 +76,8 @@ class ArticlesController < ApplicationController
     end
     
     def article_params
-      params.require(:article).permit(:name, :content)
+      params.fetch(:article, {}).permit(:name, 
+                                      :content,
+                                      attachments_attributes: [:file, :file_cache])
     end
 end

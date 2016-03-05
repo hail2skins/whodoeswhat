@@ -16,4 +16,7 @@ Rails.application.routes.draw do
     resources :groups
     resources :articles
   end
+  
+  resources :attachments, only: [:show, :new]
+  
 end

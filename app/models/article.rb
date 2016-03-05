@@ -10,16 +10,21 @@
 #  updated_at  :datetime         not null
 #
 class Article < ApplicationRecord
-  validates :name, presence: true
-  validates_length_of :content_count, minimum: 20, too_short: "your content must be at least 20 words"
-  
-  
   belongs_to :business
+  has_many :attachments
+  accepts_nested_attributes_for :attachments, reject_if: :all_blank
 
-
+  validates :name, presence: true
+  validates_length_of :content, minimum: 50, too_short: "your content must be at least 50 characters"
+  
+  
   private
     def content_count
-      content.scan(/\w+/)
+      if content.blank?
+        content = nil
+      else
+        content.scan(/\w+/)
+      end
     end
 
 
