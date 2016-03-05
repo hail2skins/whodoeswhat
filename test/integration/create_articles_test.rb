@@ -133,7 +133,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   end  
   
   test "with multiple attachments" do
-    Capybara.javascript_driver = :phantomjs
+    #Capybara.javascript_driver = :webkit
     load_first_group_business
     visit new_business_article_path(load_business)
     fill_in "Name", with: "Multiple attachments"
@@ -151,7 +151,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
       check_content "speed.txt",
                     "spin.txt"
     end
-    Capybara.use_default_driver
+    #Capybara.use_default_driver
   end
   
   
