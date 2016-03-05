@@ -6,7 +6,8 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   end
   
   def teardown
-    click_link "Sign out"
+    Capybara.use_default_driver
+    reset_session!
   end
   
   def login_user
@@ -133,9 +134,10 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   end  
   
   test "with multiple attachments" do
-    #Capybara.javascript_driver = :webkit
-    load_first_group_business
-    visit new_business_article_path(load_business)
+    logout
+    Capybara.current_driver = Capybara.javascript_driver
+    login_as(users(:article_user))
+    visit new_business_article_path(businesses(:article_business))
     fill_in "Name", with: "Multiple attachments"
     fill_in "Content", with: "I want this to work.   
                               I need this to work.   
@@ -146,12 +148,11 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     click_link "Add another file"
     attach_file "File #2", Rails.root.join("test/files/spin.txt")
     click_button "Create article"
-    
+    puts page.body
     within(".attachments") do
       check_content "speed.txt",
                     "spin.txt"
     end
-    #Capybara.use_default_driver
   end
   
   
