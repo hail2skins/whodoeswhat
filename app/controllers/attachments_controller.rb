@@ -6,5 +6,12 @@ class AttachmentsController < ApplicationController
     send_file attachment.file.path, disposition: :inline
   end
   
+  def new
+    @index = params[:index].to_i
+    @article = Article.new
+    @article.attachments.build
+    render layout: false
+  end
+  
   
 end

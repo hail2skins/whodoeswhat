@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   def new
     @article = @business.articles.build
     authorize @business
-    3.times { @article.attachments.build }
+    @article.attachments.build
   end
   
   def create

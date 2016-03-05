@@ -133,6 +133,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   end  
   
   test "with multiple attachments" do
+    Capybara.javascript_driver = :phantomjs
     load_first_group_business
     visit new_business_article_path(load_business)
     fill_in "Name", with: "Multiple attachments"
@@ -142,15 +143,15 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               I demand it to work.
                               Or I shall die."
     attach_file "File #1", Rails.root.join("test/files/speed.txt")
+    click_link "Add another file"
     attach_file "File #2", Rails.root.join("test/files/spin.txt")
-    attach_file "File #3", Rails.root.join("test/files/gradient.txt")
     click_button "Create article"
     
     within(".attachments") do
       check_content "speed.txt",
-                    "spin.txt",
-                    "gradient.txt"
+                    "spin.txt"
     end
+    Capybara.use_default_driver
   end
   
   
