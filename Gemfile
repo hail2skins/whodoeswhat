@@ -34,6 +34,8 @@ gem 'redis', '~> 3.0'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 
+gem "fog"
+
 #also bootstrap but for tether whatever that means
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
