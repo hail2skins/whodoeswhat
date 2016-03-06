@@ -7,7 +7,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   
   def teardown
     Capybara.use_default_driver
-    reset_session!
+    logout
   end
   
   def login_user
@@ -134,8 +134,12 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   end  
   
   test "with multiple attachments" do
+    Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app,
+                                      :phantomjs_options => ['--debug=no', '--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=TLSv1'], :debug => false)
+  end
     logout
-    Capybara.current_driver = Capybara.javascript_driver
+    Capybara.current_driver = :poltergeist
     login_as(users(:article_user))
     visit new_business_article_path(businesses(:article_business))
     fill_in "Name", with: "Multiple attachments"
@@ -148,7 +152,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     click_link "Add another file"
     attach_file "File #2", Rails.root.join("test/files/spin.txt")
     click_button "Create article"
-    puts page.body
+    
     within(".attachments") do
       check_content "speed.txt",
                     "spin.txt"

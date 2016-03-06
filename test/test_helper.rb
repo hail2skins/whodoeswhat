@@ -1,12 +1,18 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+ENV["MT_RAILS_NO_AUTORUN"] = "true"
 require 'capybara/rails'
 require 'capybara/poltergeist'
 require 'minitest/rails'
 require 'minitest/rails/capybara'
 require 'policy_assertions'
 Capybara.javascript_driver = :poltergeist
+
+    Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app,
+                                      :phantomjs_options => ['--debug=no', '--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=TLSv1'], :debug => false)
+  end
 
 require "minitest/reporters"
 reporter_options = { color: true }
@@ -33,6 +39,8 @@ class ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
   
   CarrierWave.root = 'test/fixtures/files'
-  
-
+  def teardown
+    Warden.test_reset!
+  end
+  Capybara.default_max_wait_time = 30
 end

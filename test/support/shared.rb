@@ -32,6 +32,3 @@
     end
   end
   
-  def logout
-    click_link "Sign out"
-  end
