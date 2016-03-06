@@ -11,7 +11,7 @@
 #
 class Article < ApplicationRecord
   belongs_to :business
-  has_many :attachments
+  has_many :attachments, dependent: :destroy
   accepts_nested_attributes_for :attachments, reject_if: :all_blank
 
   validates :name, presence: true
