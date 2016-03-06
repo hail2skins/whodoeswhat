@@ -35,6 +35,7 @@ gem 'bootstrap-sass'
 gem "font-awesome-rails"
 
 gem "fog"
+gem "newrelic_rpm"
 
 #also bootstrap but for tether whatever that means
 source 'https://rails-assets.org' do
