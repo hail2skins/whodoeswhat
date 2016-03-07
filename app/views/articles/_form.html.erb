@@ -1,6 +1,7 @@
 <%= simple_form_for([@business, @article]) do |f| %>
   <%= f.input :name %>
   <%= f.input :content %>
+  <%= f.error :content_count, class: "alert-error" %>
   <div id="attachments">
     <h3>Attachments</h3>
     <% index = 0 %>

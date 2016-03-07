@@ -20,11 +20,7 @@ class Article < ApplicationRecord
   
   private
     def content_count
-      if content.blank?
-        content = nil
-      else
-        content.scan(/\w+/)
-      end
+      content.scan(/\w+/) unless content.blank?
     end
 
 

@@ -6,8 +6,8 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
   end
   
   def teardown
-    click_link "Sign out"
-  end
+    Capybara.use_default_driver
+    logout  end
   
   def article_user
     users(:article_user)
@@ -69,4 +69,29 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
                   "can't be blank",
                   "your content must be at least 50 characters"
   end
+  
+    test "update article without attachments with one attachment" do
+    logout
+    Capybara.current_driver = :poltergeist
+    login_as(users(:article_user))
+    visit new_business_article_path(article_business)
+    fill_in "Name", with: "No attachments"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    click_button "Create article"
+    
+    click_link "Edit"
+    fill_in "Name", with: "Now one attachment"
+    click_link "Add another file"
+    attach_file "File #1", Rails.root.join("test/files/spin.txt")
+    click_button "Update article"
+    
+    within(".attachments") do
+      check_content "spin.txt"
+    end
+  end
+  
 end

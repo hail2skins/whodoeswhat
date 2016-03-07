@@ -76,7 +76,8 @@ class ArticlesController < ApplicationController
     end
     
     def article_params
-      params.fetch(:article, {}).permit(:name, 
+      params.fetch(:article, {}).permit(:id, 
+                                      :name, 
                                       :content,
                                       attachments_attributes: [:file, :file_cache])
     end
