@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :articles
   end
   
-  resources :attachments, only: [:show, :new, :edit]
+  resources :attachments, only: [:show, :new]
 
   
 end
