@@ -57,6 +57,7 @@ gem "pundit"
 gem "annotate"
 
 gem "carrierwave"
+gem "cocoon"
 
 #log in right
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
