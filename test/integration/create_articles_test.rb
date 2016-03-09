@@ -145,7 +145,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               I demand it to work.
                               Or I shall die."
     attach_file "File #1", Rails.root.join("test/files/speed.txt")
-    click_link "Add another file"
+    click_link "add attachment"
     attach_file "File #2", Rails.root.join("test/files/spin.txt")
     click_button "Create article"
     

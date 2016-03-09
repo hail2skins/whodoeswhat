@@ -44,6 +44,7 @@ class ArticlesController < ApplicationController
   
   def edit
     authorize @business
+
   end
   
   def update
@@ -79,6 +80,7 @@ class ArticlesController < ApplicationController
       params.fetch(:article, {}).permit(:id, 
                                       :name, 
                                       :content,
+                                      :_destroy,
                                       attachments_attributes: [:file, :file_cache])
     end
 end

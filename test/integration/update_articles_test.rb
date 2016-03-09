@@ -85,8 +85,8 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     
     click_link "Edit"
     fill_in "Name", with: "Now one attachment"
-    click_link "Add another file"
-    attach_file "File #1", Rails.root.join("test/files/spin.txt")
+    click_link "add attachment"
+    attach_file "File", Rails.root.join("test/files/spin.txt")
     click_button "Update article"
     
     within(".attachments") do
