@@ -2,15 +2,16 @@
   <%= f.input :name %>
   <%= f.input :content %>
   <%= f.error :content_count, class: "alert-error" %>
-  <div id="attachments">
-    <h3>Attachments</h3>
-    <% index = 0 %>
-    <%= render partial: "attachments/form", locals: { f: f, index: 0 } %>
-  </div>
-  <p>
-    <%= link_to "Add another file", new_attachment_path, remote: true,
-      id: "add_file", data: { params: {index: @article.attachments.size} } %>
-  </p>
+  <h3>Attachments</h3>
+    <div id="attachments">
+    <%= f.simple_fields_for :attachments do |attachment| %>
+      <%= render 'attachment_fields', f: attachment %>
+    <% end %>
+  <div class='links'>
+    <%= link_to_add_association 'add attachment', f, :attachments %>
 
-  <%= f.button :submit, class: "btn-primary" %>
+  </div>
+  </div>
+  <%= f.button :submit, class: "btn btn-primary" %>
+
 <% end %>

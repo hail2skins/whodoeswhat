@@ -81,7 +81,7 @@ test "users can view an article's attached files" do
                               I will make it work.   
                               I demand it to work.
                               Or I shall die."
-  attach_file "File #1", "test/files/speed.txt"
+  attach_file "File", "test/files/speed.txt"
   click_button "Create article" 
  
   visit business_article_path(article_business, article_three)
