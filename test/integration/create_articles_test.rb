@@ -106,7 +106,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               I will make it work.   
                               I demand it to work.
                               Or I shall die."
-    attach_file "File #1", "test/files/speed.txt"
+    attach_file "File", "test/files/speed.txt"
     click_button "Create article"
     
     within(".attachments") do
@@ -117,7 +117,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   test "persisting file uploads across form displays" do
     load_first_group_business
     visit new_business_article_path(load_business)
-    attach_file "File #1", "test/files/speed.txt"
+    attach_file "File", "test/files/speed.txt"
     click_button "Create article"
     
     fill_in "Name", with: "Persistence test"
@@ -144,9 +144,11 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               I will make it work.   
                               I demand it to work.
                               Or I shall die."
-    attach_file "File #1", Rails.root.join("test/files/speed.txt")
+    attach_file "File", Rails.root.join("test/files/speed.txt")
     click_link "add attachment"
-    attach_file "File #2", Rails.root.join("test/files/spin.txt")
+    within all(".nested-fields").last do
+      attach_file"File", Rails.root.join("test/files/spin.txt")
+    end
     click_button "Create article"
     
     within(".attachments") do

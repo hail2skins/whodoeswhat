@@ -20,6 +20,7 @@ class ArticlesController < ApplicationController
   end
   
   def new
+    @index = params[:index].to_i
     @article = @business.articles.build
     authorize @business
     @article.attachments.build
