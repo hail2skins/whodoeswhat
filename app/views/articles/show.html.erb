@@ -33,4 +33,13 @@
       <% end %>
     </div>
   <% end %>
+  
+  <% if @article.contacts.any? %>
+    <h4>Contacts</h4>
+    <div class="contacts">
+      <% @article.contacts.each do |contact| %>
+        <p><%= contact.name %>, <%= link_to contact.email %></p>
+      <% end %>
+    </div>
+    <% end %>
 </div>

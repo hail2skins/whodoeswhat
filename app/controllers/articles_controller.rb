@@ -20,10 +20,10 @@ class ArticlesController < ApplicationController
   end
   
   def new
-    @index = params[:index].to_i
     @article = @business.articles.build
     authorize @business
     @article.attachments.build
+    @article.contacts.build
   end
   
   def create
@@ -82,6 +82,7 @@ class ArticlesController < ApplicationController
                                       :name, 
                                       :content,
                                       :_destroy,
+                                      contacts_attributes: [:first_name, :last_name, :email],
                                       attachments_attributes: [:file, :file_cache])
     end
 end

@@ -75,7 +75,7 @@ end
 
 test "users can view an article's attached files" do
   visit new_business_article_path(article_business)
-  fill_in "Name", with: "View attachments"
+  fill_in "Title", with: "View attachments"
   fill_in "Content", with: "I want this to work.   
                               I need this to work.   
                               I will make it work.   

@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305022052) do
+ActiveRecord::Schema.define(version: 20160310025100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "article_contacts", force: :cascade do |t|
+    t.integer  "article_id"
+    t.integer  "contact_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "article_contacts", ["article_id"], name: "index_article_contacts_on_article_id", using: :btree
+  add_index "article_contacts", ["contact_id"], name: "index_article_contacts_on_contact_id", using: :btree
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
@@ -22,18 +32,20 @@ ActiveRecord::Schema.define(version: 20160305022052) do
     t.integer  "business_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["business_id"], name: "index_articles_on_business_id", using: :btree
-    t.index ["content"], name: "index_articles_on_content", using: :btree
-    t.index ["name"], name: "index_articles_on_name", using: :btree
   end
+
+  add_index "articles", ["business_id"], name: "index_articles_on_business_id", using: :btree
+  add_index "articles", ["content"], name: "index_articles_on_content", using: :btree
+  add_index "articles", ["name"], name: "index_articles_on_name", using: :btree
 
   create_table "attachments", force: :cascade do |t|
     t.string   "file"
     t.integer  "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["article_id"], name: "index_attachments_on_article_id", using: :btree
   end
+
+  add_index "attachments", ["article_id"], name: "index_attachments_on_article_id", using: :btree
 
   create_table "businesses", force: :cascade do |t|
     t.string   "name"
@@ -41,23 +53,37 @@ ActiveRecord::Schema.define(version: 20160305022052) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "contacts", ["email"], name: "index_contacts_on_email", using: :btree
+  add_index "contacts", ["first_name"], name: "index_contacts_on_first_name", using: :btree
+  add_index "contacts", ["last_name"], name: "index_contacts_on_last_name", using: :btree
+
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "business_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["business_id"], name: "index_groups_on_business_id", using: :btree
   end
+
+  add_index "groups", ["business_id"], name: "index_groups_on_business_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_memberships_on_group_id", using: :btree
-    t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
   end
+
+  add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -72,10 +98,13 @@ ActiveRecord::Schema.define(version: 20160305022052) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  add_foreign_key "article_contacts", "articles"
+  add_foreign_key "article_contacts", "contacts"
   add_foreign_key "articles", "businesses"
   add_foreign_key "attachments", "articles"
   add_foreign_key "memberships", "groups"

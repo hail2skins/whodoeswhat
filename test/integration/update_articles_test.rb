@@ -32,7 +32,7 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     assert_equal edit_business_article_path(article_business, article_one), current_path
     assert_title "Edit Knowledge"
     check_content "Edit Knowledge"
-    fill_in "Name", with: "New Name Article"
+    fill_in "Title", with: "New Name Article"
     fill_in "Content", with: "Yep.  I still need 20
                               words and I have to type
                               a lot to get there but
@@ -61,7 +61,7 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
   
   test "fail to edit article due to invalid fields" do
     visit edit_business_article_path(article_business, article_one)
-    fill_in "Name", with: ""
+    fill_in "Title", with: ""
     fill_in "Content", with: ""
     click_button "Update article"
     
@@ -75,7 +75,7 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     Capybara.current_driver = :poltergeist
     login_as(users(:article_user))
     visit new_business_article_path(article_business)
-    fill_in "Name", with: "No attachments"
+    fill_in "Title", with: "No attachments"
     fill_in "Content", with: "I want this to work.   
                               I need this to work.   
                               I will make it work.   
@@ -84,7 +84,7 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     click_button "Create article"
     
     click_link "Edit"
-    fill_in "Name", with: "Now one attachment"
+    fill_in "Title", with: "Now one attachment"
     click_link "add attachment"
     attach_file "File", Rails.root.join("test/files/spin.txt")
     click_button "Update article"

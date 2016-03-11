@@ -1,17 +1,25 @@
 <%= simple_form_for([@business, @article]) do |f| %>
-  <%= f.input :name %>
+  <%= f.input :name, label: "Title" %>
   <%= f.input :content %>
   <%= f.error :content_count, class: "alert-error" %>
-  <h3>Attachments</h3>
-    <div id="attachments">
+  <div id="attachments">  
+    <h3>Attachments</h3>
     <%= f.simple_fields_for :attachments do |attachment| %>
       <%= render 'attachment_fields', f: attachment %>
     <% end %>
+  </div>
   <div class='links'>
     <%= link_to_add_association 'add attachment', f, :attachments %>
+  </div>
+  <div id="contacts">
+    <h3>Business Contacts</h3>
+    <%= f.simple_fields_for :contacts, class: "form-inline" do |contact| %>
+      <%= contact.input :first_name, label: "Contact First Name" %>
+      <%= contact.input :last_name, label: "Contact Last Name" %>
+      <%= contact.input :email, label: "Contact Email" %>
+    <% end %>
+  </div>
 
-  </div>
-  </div>
   <%= f.button :submit, class: "btn btn-primary" %>
 
 <% end %>

@@ -36,7 +36,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     
     assert_equal new_business_article_path(load_business, Article.new), current_path
     assert_title "Create Knowledge"
-    fill_in "Name", with: "First article testing"
+    fill_in "Title", with: "First article testing"
     fill_in "Content", with: "I have to test 20 words or this will not work how I want so I am typing a lot here to make sure I am over 20 words and that's all I'm doing"
 
     click_button "Create article"
@@ -69,7 +69,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     click_link "Create new article"
     
     assert_equal new_business_article_path(load_business, Article.new), current_path
-    fill_in "Name", with: "Second bitching article"
+    fill_in "Title", with: "Second bitching article"
     fill_in "Content", with: "I want this to work.   
                               I need this to work.   
                               I will make it work.   
@@ -100,7 +100,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   test "with an attachment" do
     load_first_group_business
     visit new_business_article_path(load_business)
-    fill_in "Name", with: "Attachment test"
+    fill_in "Title", with: "Attachment test"
     fill_in "Content", with: "I want this to work.   
                               I need this to work.   
                               I will make it work.   
@@ -120,7 +120,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     attach_file "File", "test/files/speed.txt"
     click_button "Create article"
     
-    fill_in "Name", with: "Persistence test"
+    fill_in "Title", with: "Persistence test"
     fill_in "Content", with: "I want this to work.   
                               I need this to work.   
                               I will make it work.   
@@ -138,7 +138,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     Capybara.current_driver = :poltergeist
     login_as(users(:article_user))
     visit new_business_article_path(businesses(:article_business))
-    fill_in "Name", with: "Multiple attachments"
+    fill_in "Title", with: "Multiple attachments"
     fill_in "Content", with: "I want this to work.   
                               I need this to work.   
                               I will make it work.   
@@ -156,6 +156,28 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                     "spin.txt"
     end
   end
+  
+  test "create article with associated contacts" do
+    load_first_group_business
+    visit new_business_article_path(load_business)
+    
+    fill_in "Title", with: "Contact test"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    fill_in "Contact First Name", with: "Art"
+    fill_in "Contact Last Name", with: "Mills"
+    fill_in "Contact Email", with: "art@hamcois.com"
+    click_button "Create article"
+    
+    within(".contacts") do
+      check_content "Art Mills",
+                    "art@hamcois.com"
+    end
+    
+  end   
   
   
 end
