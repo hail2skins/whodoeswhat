@@ -175,6 +175,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     within(".contacts") do
       check_content "Art Mills",
                     "art@hamcois.com"
+                    
     end
     
   end   
