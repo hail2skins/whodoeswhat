@@ -27,7 +27,8 @@ class ArticlesController < ApplicationController
   end
   
   def create
-    @article = @business.articles.new(article_params)
+    whitelisted_params = article_params
+    @article = @business.articles.build(whitelisted_params)
     authorize @business
     
     respond_to do |format|
