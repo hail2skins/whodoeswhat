@@ -157,7 +157,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     end
   end
   
-  test "create article with associated contacts" do
+  test "create article with single associated contact" do
     load_first_group_business
     visit new_business_article_path(load_business)
     
