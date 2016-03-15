@@ -177,8 +177,10 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                     "art@hamcois.com"
                     
     end
-    
   end   
   
+  test "create article with multiple associated contacts" do
+    
+  end
   
 end
