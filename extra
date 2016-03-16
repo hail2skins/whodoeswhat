@@ -1,0 +1,33 @@
+    respond_to do |format|
+      if @article.save
+        format.html { redirect_to business_article_path(@business, @article), notice: "Knowledge created." }
+      else
+        format.html { render 'new' }
+      end
+    end
+    
+    
+      if params[:article][:contacts_attributes]
+    params[:article][:contacts_attributes].values.each do |item|
+      existing_contact = Contact.find_by(email: item[:email])
+      if existing_contact.present?
+        ArticleContact.create!(article_id: @article.id, contact_id: existing_contact.id)
+        Article.create!()
+    end
+    puts "YES"
+    render "edit"
+  else
+    puts "NOPE"
+    render "edit"
+  end
+  
+  
+  
+     if params[:article][:contacts_attributes]
+      whitelisted_params.delete(:contacts_attributes)
+    end
+    @article = @business.articles.build(whitelisted_params)
+         params[:article][:contacts_attributes].values.each do |contact|
+        article_contact = Contact.find_or_create_by(first_name: contact[:first_name], last_name: contact[:last_name], email: contact[:email])
+        @article.contacts << article_contact
+      end  

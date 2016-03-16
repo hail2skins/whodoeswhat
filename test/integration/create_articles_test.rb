@@ -146,7 +146,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               Or I shall die."
     attach_file "File", Rails.root.join("test/files/speed.txt")
     click_link "add attachment"
-    within all(".nested-fields").last do
+    within all("#attachment-fields").last do
       attach_file"File", Rails.root.join("test/files/spin.txt")
     end
     click_button "Create article"
@@ -180,6 +180,31 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   end   
   
   test "create article with multiple associated contacts" do
+   logout
+    Capybara.current_driver = :poltergeist
+    login_as(users(:article_user))
+    visit new_business_article_path(businesses(:article_business))
+    fill_in "Title", with: "Multiple contact test"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    fill_in "Contact First Name", with: "Art"
+    fill_in "Contact Last Name", with: "Mills"
+    fill_in "Contact Email", with: "art@test.com"
+    click_link "add contact"
+    within all("#contact-fields").last do
+      fill_in "Contact First Name", with: "Jonathan"
+      fill_in "Contact Last Name", with: "Engstrom"
+      fill_in "Contact Email", with: "jonathan@test.com"
+    end
+    click_button "Create article"
+    
+    within(".contacts") do
+      check_content "Art Mills, art@test.com",
+                    "Jonathan Engstrom, jonathan@test.com"
+    end
     
   end
   

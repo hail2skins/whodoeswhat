@@ -13,11 +13,12 @@
   </div>
   <div id="contacts">
     <h3>Business Contacts</h3>
-    <%= f.simple_fields_for :contacts, class: "form-inline" do |contact| %>
-      <%= contact.input :first_name, label: "Contact First Name" %>
-      <%= contact.input :last_name, label: "Contact Last Name" %>
-      <%= contact.input :email, label: "Contact Email" %>
+    <%= f.simple_fields_for :contacts do |contact| %>
+      <%= render 'contact_fields', f: contact %>
     <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'add contact', f, :contacts %>
   </div>
 
   <%= f.button :submit, class: "btn btn-primary" %>
