@@ -23,3 +23,7 @@ article_membership:
 attachment_membership:
   user: attachment_user
   group: attachment_group
+  
+contact_membership:
+  user: contact_user
+  group: contact_group

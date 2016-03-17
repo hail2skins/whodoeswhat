@@ -20,4 +20,6 @@ article_business:
 attachment_business:
   name: "Attachment Business"
 
+contact_business:
+  name: "Contact Business"
 

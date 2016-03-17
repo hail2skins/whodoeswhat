@@ -2,9 +2,21 @@
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  article: 
-  contact: 
+  article: contact_article_one
+  contact: contact_one
 
 two:
-  article: 
-  contact: 
+  article: contact_article_one
+  contact: contact_two
+  
+three:
+  article: contact_article_two
+  contact: contact_three
+  
+four:
+  article: contact_article_three
+  contact: contact_one
+  
+five:
+  article: contact_article_three
+  contact: contact_three

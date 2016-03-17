@@ -28,4 +28,9 @@ attachment_group:
   description: "Nothing interesting"
   business: attachment_business
 
+contact_group:
+  name: "Contact Business Admin"
+  description: "Nothing interesting"
+  business: contact_business
+
 
