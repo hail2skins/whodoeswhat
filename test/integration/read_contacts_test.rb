@@ -26,6 +26,10 @@ class ReadContactsTest < ActionDispatch::IntegrationTest
     articles(:contact_article_two)
   end
   
+  def contact_article_three
+    articles(:contact_article_three)
+  end
+  
   def contact_one
     contacts(:contact_one)
   end
@@ -54,16 +58,60 @@ class ReadContactsTest < ActionDispatch::IntegrationTest
   end
   
   test "confirm you can see all contacts on an index page" do
+    visit root_path
     click_link "Contacts - #{contact_business.name}"
     
     assert_equal business_contacts_path(contact_business), current_path
+    assert_title "Contacts - #{contact_business.name}"
+    check_content "Contact List"
+    check_links "Return to main page"
+    within(".table") do
+      check_content "First Name",
+                    "Last Name",
+                    "Email",
+                    "Articles Associated",
+                    "Art",
+                    "Mills",
+                    "art@test.com",
+                    "Jonathan",
+                    "Engstrom",
+                    "jonathan@test.com",
+                    "Drew",
+                    "Pierce",
+                    "drew@test.com"
+    end
     
     
   end
   
-  test "confirm when you view a contact all associated tickets show for him" do
-  
+  test "view a specific contact from an article page" do
+    visit business_article_path(contact_business, contact_article_one)
+    click_link contact_one.email
+    
+    assert_equal business_contact_path(contact_business, contact_one), current_path
+    assert_title "Contact - #{contact_one.name}"
+    check_content "Associated Articles",
+                  "#{contact_business.name} Contact",
+                  "Name: #{contact_one.name}",
+                  "Email: #{contact_one.email}",
+                  "Associated Article Count: 2"
+    check_links "Back to main page"
+    within(".table-kb-information") do
+      check_content "Name",
+                    "Content",
+                    "Last touched",
+                    contact_article_one.name,
+                    contact_article_three.name
+    end
   end
-
+  
+  test "view a specific contact from the contact index page" do
+    visit business_contacts_path(contact_business)
+    puts page.body
+    click_link contact_one.email
+    
+    assert_equal business_contact_path(contact_business, contact_one), current_path
+  end
+  
 
 end

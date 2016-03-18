@@ -38,7 +38,7 @@
     <h4>Contacts</h4>
     <div class="contacts">
       <% @article.contacts.each do |contact| %>
-        <p><%= contact.name %>, <%= link_to contact.email %></p>
+        <p><%= contact.name %>, <%= link_to contact.email, business_contact_path(@business, contact) %></p>
       <% end %>
     </div>
     <% end %>
