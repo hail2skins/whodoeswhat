@@ -9,6 +9,8 @@
                   <% current_user.groups.each do |group| %>
                     <li class="nav-item"><%= link_to "KB - #{group.business.name}",
                                             business_articles_path(group.business), class: "nav-link" %></li>
+                    <li class="nav-item"><%= link_to "Contacts - #{group.business.name}",
+                                            business_contacts_path(group.business), class: "nav-link" %></li>  
                   <% end %>
                 <% end %>
                 <li class="nav-item"><a class="nav-link" href="#">Placeholder</a></li>

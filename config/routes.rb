@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :businesses do
     resources :groups
     resources :articles
+    resources :contacts
   end
   
   resources :attachments, only: [:show, :new]

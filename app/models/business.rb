@@ -11,6 +11,7 @@
 class Business < ApplicationRecord
   has_many :groups
   has_many :articles
+  has_many :contacts, through: :articles
   
   validates :name, presence: true
 end

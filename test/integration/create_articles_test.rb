@@ -24,7 +24,8 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     #from load.rb to create business, group and membership
     load_first_group_business
     visit current_path
-    check_links "KB - #{load_business.name}"
+    check_links "KB - #{load_business.name}",
+                "Contacts - #{load_business.name}"
     click_link "KB - #{load_business.name}"
     
     assert_equal business_articles_path(load_business), current_path
