@@ -181,7 +181,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   end   
   
   test "create article with multiple associated contacts" do
-   logout
+    logout
     Capybara.current_driver = :poltergeist
     login_as(users(:article_user))
     visit new_business_article_path(businesses(:article_business))
@@ -206,6 +206,38 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
       check_content "Art Mills, art@test.com",
                     "Jonathan Engstrom, jonathan@test.com"
     end
+    
+  end
+  
+  test "create second article with same contact and ensure contact is same as previous" do
+    load_first_group_business
+    visit new_business_article_path(load_business)
+    
+    fill_in "Title", with: "Contact test"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    fill_in "Contact First Name", with: "Art"
+    fill_in "Contact Last Name", with: "Mills"
+    fill_in "Contact Email", with: "art@test.com"
+    click_button "Create article" 
+    
+    visit new_business_article_path(load_business)
+    fill_in "Title", with: "Contact test two"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    fill_in "Contact First Name", with: "Art"
+    fill_in "Contact Last Name", with: "Mills"
+    fill_in "Contact Email", with: "art@test.com"
+    click_button "Create article"   
+    
+    visit business_contacts_path(load_business)
+    assert page.has_link?("art@test.com", count: 1), "Page should have 1 art@test.com link but has more or less."
     
   end
   
