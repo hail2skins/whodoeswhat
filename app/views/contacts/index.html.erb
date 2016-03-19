@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @contacts.each do |contact| %>
+        <% @contacts.uniq.each do |contact| %>
         <tr>
           <td><%= contact.first_name %></td>
           <td><%= contact.last_name %></td>

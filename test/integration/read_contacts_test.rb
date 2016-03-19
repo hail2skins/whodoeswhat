@@ -107,7 +107,6 @@ class ReadContactsTest < ActionDispatch::IntegrationTest
   
   test "view a specific contact from the contact index page" do
     visit business_contacts_path(contact_business)
-    puts page.body
     click_link contact_one.email
     
     assert_equal business_contact_path(contact_business, contact_one), current_path
