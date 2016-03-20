@@ -94,4 +94,8 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     end
   end
   
+  test "update article without contacts with one contact" do
+    
+  end
+  
 end

@@ -30,25 +30,27 @@ class ArticlesController < ApplicationController
     authorize @business
     whitelisted_params = article_params
 
-    if params[:article][:contacts_attributes]
+    unless params[:article][:contacts_attributes].values.all?(&:blank?)
       whitelisted_params.delete(:contacts_attributes)
+    
+      @article = @business.articles.build(whitelisted_params)
+  
+      params[:article][:contacts_attributes].values.each do |contact|
+        email = contact[:email].downcase unless !contact[:email]
+        
+        if Contact.find_by(email: email)
+          existing_contact = Contact.find_by(email: email)
+          @article.contacts << existing_contact
+        else
+          new_contact = Contact.create!(first_name: contact[:first_name], 
+                                        last_name: contact[:last_name], 
+                                        email: email)
+          @article.contacts << new_contact
+        end
+      end 
+    else
+      @article = @business.articles.build(article_params)
     end
-
-    @article = @business.articles.build(whitelisted_params)
-
-    params[:article][:contacts_attributes].values.each do |contact|
-      email = contact[:email].downcase unless !contact[:email]
-      
-      if Contact.find_by(email: email)
-        existing_contact = Contact.find_by(email: email)
-        @article.contacts << existing_contact
-      else
-        new_contact = Contact.create!(first_name: contact[:first_name], 
-                                      last_name: contact[:last_name], 
-                                      email: email)
-        @article.contacts << new_contact
-      end
-    end      
     
     respond_to do |format|
       if @article.save
@@ -102,8 +104,8 @@ class ArticlesController < ApplicationController
                                       :name, 
                                       :content,
                                       :_destroy,
-                                      contacts_attributes: [:first_name, :last_name, :email],
-                                      attachments_attributes: [:file, :file_cache])
+                                      contacts_attributes: [:first_name, :last_name, :email, :_destroy],
+                                      attachments_attributes: [:file, :file_cache, :_destroy])
     end
     
     def check_for_contacts
