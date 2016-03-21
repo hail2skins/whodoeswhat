@@ -30,9 +30,8 @@ class ArticlesController < ApplicationController
     authorize @business
     whitelisted_params = article_params
 
-    unless params[:article][:contacts_attributes].values.all?(&:blank?)
+    if params[:article][:contacts_attributes]["0"][:email].present?
       whitelisted_params.delete(:contacts_attributes)
-    
       @article = @business.articles.build(whitelisted_params)
   
       params[:article][:contacts_attributes].values.each do |contact|
@@ -49,7 +48,7 @@ class ArticlesController < ApplicationController
         end
       end 
     else
-      @article = @business.articles.build(article_params)
+      @article = @business.articles.build(whitelisted_params)
     end
     
     respond_to do |format|
@@ -108,9 +107,4 @@ class ArticlesController < ApplicationController
                                       attachments_attributes: [:file, :file_cache, :_destroy])
     end
     
-    def check_for_contacts
-      if params[:article][:contacts_attributes]
-        whitelisted_params.delete(:contacts_attributes)
-      end
-    end
 end

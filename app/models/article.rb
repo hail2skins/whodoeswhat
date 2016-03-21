@@ -15,7 +15,7 @@ class Article < ApplicationRecord
   accepts_nested_attributes_for :attachments, reject_if: :all_blank
   has_many :article_contacts
   has_many :contacts, through: :article_contacts
-  accepts_nested_attributes_for :contacts, reject_if: :all_blank
+  accepts_nested_attributes_for :contacts, reject_if: proc { |attributes| attributes.any? {|k,v| v.blank?} }
 
   validates :name, presence: true
   validates_length_of :content, minimum: 50, too_short: "your content must be at least 50 characters"
