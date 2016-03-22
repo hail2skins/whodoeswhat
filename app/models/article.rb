@@ -20,6 +20,13 @@ class Article < ApplicationRecord
   validates :name, presence: true
   validates_length_of :content, minimum: 50, too_short: "your content must be at least 50 characters"
   
+  def self.search(term)
+    where('LOWER(first_name) ILIKE :term OR 
+           LOWER(last_name) ILIKE :term OR 
+           LOWER(email) ILIKE :term', 
+           term: "%#{term.downcase}%")
+  end
+ 
   
   private
     def content_count
