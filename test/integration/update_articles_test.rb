@@ -70,7 +70,7 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
                   "your content must be at least 50 characters"
   end
   
-    test "update article without attachments with one attachment" do
+  test "update article without attachments with one attachment" do
     logout
     Capybara.current_driver = :poltergeist
     login_as(users(:article_user))
@@ -95,6 +95,8 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
   end
   
   test "update article without contacts with one contact" do
+    visit edit_business_article_path(article_business, article_one)
+    
     
   end
   
