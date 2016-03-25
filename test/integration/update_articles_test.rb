@@ -97,7 +97,6 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
   test "update article without contacts with one contact" do
     visit edit_business_article_path(article_business, article_one)
     
-    
   end
   
 end
