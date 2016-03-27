@@ -13,6 +13,7 @@
 class ArticlesController < ApplicationController
   before_action :get_business
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  after_action :update_contact, only: [:create, :update]
   
   def index
     @articles = @business.articles.all
@@ -28,29 +29,8 @@ class ArticlesController < ApplicationController
   
   def create
     authorize @business
-    whitelisted_params = article_params
+    @article = @business.articles.build(article_params)
 
-    if params[:article][:contacts_attributes]["0"][:email].present?
-      whitelisted_params.delete(:contacts_attributes)
-      @article = @business.articles.build(whitelisted_params)
-  
-      params[:article][:contacts_attributes].values.each do |contact|
-        email = contact[:email].downcase unless !contact[:email]
-        
-        if Contact.find_by(email: email)
-          existing_contact = Contact.find_by(email: email)
-          @article.contacts << existing_contact
-        else
-          new_contact = Contact.create!(first_name: contact[:first_name], 
-                                        last_name: contact[:last_name], 
-                                        email: email)
-          @article.contacts << new_contact
-        end
-      end 
-    else
-      @article = @business.articles.build(whitelisted_params)
-    end
-    
     respond_to do |format|
       if @article.save
         format.html { redirect_to business_article_path(@business, @article), notice: "Knowledge created." }
@@ -103,8 +83,18 @@ class ArticlesController < ApplicationController
                                       :name, 
                                       :content,
                                       :_destroy,
+                                      :contact_tokens,
                                       contacts_attributes: [:first_name, :last_name, :email, :_destroy],
                                       attachments_attributes: [:file, :file_cache, :_destroy])
+    end
+    
+    def update_contact
+      if @article.contacts.any?
+        @article.contacts.each do |update|
+          update.update_attribute(:business_id, @article.business_id) unless update.business_id
+        end
+      end
+      
     end
     
 end

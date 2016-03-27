@@ -14,6 +14,7 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
+//= require jquery.tokeninput
 //= require turbolinks
 //= require cocoon
 //= require_tree .

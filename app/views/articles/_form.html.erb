@@ -11,15 +11,16 @@
   <div class='links'>
     <%= link_to_add_association 'add attachment', f, :attachments %>
   </div>
-  <div id="contacts">
+  <%= content_tag "div", id: "contacts", data: { url: business_contacts_url(@business) } do %>
+
     <h3>Business Contacts</h3>
-    <%= f.simple_fields_for :contacts do |contact| %>
-      <%= render 'contact_fields', f: contact %>
-    <% end %>
-  </div>
+    
+      <%= f.input :contact_tokens, label: "Contacts", input_html: { data: { load: @article.contacts } } %>
+    
   <div class='links'>
     <%= link_to_add_association 'add contact', f, :contacts %>
-  </div>
+  </div>  
+  <% end %>
 
   <%= f.button :submit, class: "btn btn-primary" %>
 
