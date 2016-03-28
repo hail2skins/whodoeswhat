@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
     @article = @business.articles.build
     authorize @business
     @article.attachments.build
-    @article.contacts.build
+    #@article.contacts.build
   end
   
   def create

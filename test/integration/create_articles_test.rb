@@ -159,18 +159,18 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
   end
   
   test "create article with single associated contact" do
-    load_first_group_business
-    visit new_business_article_path(load_business)
-    
-    fill_in "Title", with: "Contact test"
+    logout
+    Capybara.current_driver = :poltergeist
+    login_as(users(:article_user))
+    visit new_business_article_path(businesses(:article_business))
+    fill_in "Title", with: "Multiple contact test"
     fill_in "Content", with: "I want this to work.   
                               I need this to work.   
                               I will make it work.   
                               I demand it to work.
                               Or I shall die."
-    fill_in "Contact First Name", with: "Art"
-    fill_in "Contact Last Name", with: "Mills"
-    fill_in "Contact Email", with: "art@hamcois.com"
+    fill_in "Contacts", with: "art@hamcois.com Art Mills"
+    within(:css, ".token-input-dropdown") { find("li:contains('#{options[:with]}')").click }
     click_button "Create article"
     
     within(".contacts") do
