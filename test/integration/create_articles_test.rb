@@ -169,7 +169,8 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               I will make it work.   
                               I demand it to work.
                               Or I shall die."
-    fill_in "Contacts", with: "art@hamcois.com Art Mills"
+    puts page.body
+    fill_in "article[contact_tokens]", with: "art@hamcois.com Art Mills"
     within(:css, ".token-input-dropdown") { find("li:contains('#{options[:with]}')").click }
     click_button "Create article"
     
