@@ -169,9 +169,11 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               I will make it work.   
                               I demand it to work.
                               Or I shall die."
+    page.find('input#article_contact_tokens', visible: false)
+    Capybara.ignore_hidden_elements = false
     puts page.body
-    fill_in "article[contact_tokens]", with: "art@hamcois.com Art Mills"
-    within(:css, ".token-input-dropdown") { find("li:contains('#{options[:with]}')").click }
+    fill_in 'Contacts', with: "art@hamcois.com Art Mills"
+    page.execute_script %Q{ $('li.token-input-dropdown-item2-facebook:first').trigger('mousedown') }
     click_button "Create article"
     
     within(".contacts") do
