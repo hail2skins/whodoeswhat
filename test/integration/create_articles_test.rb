@@ -173,7 +173,7 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     Capybara.ignore_hidden_elements = false
     puts page.body
     fill_in 'Contacts', with: "art@hamcois.com Art Mills"
-    page.execute_script %Q{ $('li.token-input-dropdown-item2-facebook:first').trigger('mousedown') }
+    page.execute_script %Q{ $('li.token-input-dropdown-facebook:first').trigger('mousedown') }
     click_button "Create article"
     
     within(".contacts") do
