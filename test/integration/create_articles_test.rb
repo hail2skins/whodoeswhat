@@ -169,11 +169,9 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               I will make it work.   
                               I demand it to work.
                               Or I shall die."
-    page.find('input#article_contact_tokens', visible: false)
-    Capybara.ignore_hidden_elements = false
-    puts page.body
-    fill_in 'Contacts', with: "art@hamcois.com Art Mills"
-    page.execute_script %Q{ $('li.token-input-dropdown-facebook:first').trigger('mousedown') }
+   # page.find('input#article_contact_tokens', visible: false).set contact.id
+    #Capybara.ignore_hidden_elements = false
+    fill_token_input 'article_contact_tokens', with: "art@hamcois.com Art Mills"
     click_button "Create article"
     
     within(".contacts") do
@@ -194,15 +192,8 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               I will make it work.   
                               I demand it to work.
                               Or I shall die."
-    fill_in "Contact First Name", with: "Art"
-    fill_in "Contact Last Name", with: "Mills"
-    fill_in "Contact Email", with: "art@test.com"
-    click_link "add contact"
-    within all("#contact-fields").last do
-      fill_in "Contact First Name", with: "Jonathan"
-      fill_in "Contact Last Name", with: "Engstrom"
-      fill_in "Contact Email", with: "jonathan@test.com"
-    end
+    fill_token_input 'article_contact_tokens', with: "art@test.com Art Mills"
+    fill_token_input 'article_contact_tokens', with: "jonathan@test.com Jonathan Engstrom"
     click_button "Create article"
     
     within(".contacts") do
@@ -212,36 +203,5 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     
   end
   
-  test "create second article with same contact and ensure contact is same as previous" do
-    load_first_group_business
-    visit new_business_article_path(load_business)
-    
-    fill_in "Title", with: "Contact test"
-    fill_in "Content", with: "I want this to work.   
-                              I need this to work.   
-                              I will make it work.   
-                              I demand it to work.
-                              Or I shall die."
-    fill_in "Contact First Name", with: "Art"
-    fill_in "Contact Last Name", with: "Mills"
-    fill_in "Contact Email", with: "art@test.com"
-    click_button "Create article" 
-    
-    visit new_business_article_path(load_business)
-    fill_in "Title", with: "Contact test two"
-    fill_in "Content", with: "I want this to work.   
-                              I need this to work.   
-                              I will make it work.   
-                              I demand it to work.
-                              Or I shall die."
-    fill_in "Contact First Name", with: "Art"
-    fill_in "Contact Last Name", with: "Mills"
-    fill_in "Contact Email", with: "art@test.com"
-    click_button "Create article"   
-    
-    visit business_contacts_path(load_business)
-    assert page.has_link?("art@test.com", count: 1), "Page should have 1 art@test.com link but has more or less."
-    
-  end
-  
+
 end

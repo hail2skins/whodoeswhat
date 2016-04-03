@@ -37,6 +37,7 @@ class ActionDispatch::IntegrationTest
   include Capybara::DSL
   include Capybara::Assertions
   include Warden::Test::Helpers
+  include TokenInputHelper
   
   CarrierWave.root = 'test/fixtures/files'
   def teardown

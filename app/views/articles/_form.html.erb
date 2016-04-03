@@ -17,9 +17,6 @@
     
       <%= f.input :contact_tokens, label: "Contacts", input_html: { data: { load: @article.contacts } } %>
     
-  <div class='links'>
-    <%= link_to_add_association 'add contact', f, :contacts %>
-  </div>  
   <% end %>
 
   <%= f.button :submit, class: "btn btn-primary" %>
