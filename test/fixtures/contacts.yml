@@ -5,14 +5,17 @@ contact_one:
   first_name: "Art"
   last_name: "Mills"
   email: "art@test.com"
-
+  business: contact_business
+  
 contact_two:
   first_name: "Jonathan"
   last_name: "Engstrom"
   email: "jonathan@test.com"
+  business: contact_business
 
 contact_three:
   first_name: "Drew"
   last_name: "Pierce"
   email: "drew@test.com"
+  business: contact_business
   

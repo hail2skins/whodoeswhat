@@ -2,8 +2,8 @@ class Contact < ApplicationRecord
   
   has_many :article_contacts
   has_many :articles, through: :article_contacts
-  has_one :business
-
+  belongs_to :business, required: false
+  
   def name
 	  "#{first_name} #{last_name}".to_s
   end
@@ -20,7 +20,8 @@ class Contact < ApplicationRecord
   def self.ids_from_tokens(tokens)
     tokens.gsub!(/<<<(.+?)>>>/) { create!(email: $1.split[0], 
                                           first_name: $1.split[1], 
-                                          last_name: $1.split[2]).id }
+                                          last_name: $1.split[2]).id
+    }
     tokens.split(',')
   end
   

@@ -60,7 +60,7 @@ class ReadContactsTest < ActionDispatch::IntegrationTest
   test "confirm you can see all contacts on an index page" do
     visit root_path
     click_link "Contacts - #{contact_business.name}"
-    
+
     assert_equal business_contacts_path(contact_business), current_path
     assert_title "Contacts - #{contact_business.name}"
     check_content "Contact List"
