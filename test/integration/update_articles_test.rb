@@ -95,7 +95,23 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
   end
   
   test "update article without contacts with one contact" do
+    logout
+    Capybara.current_driver = :poltergeist
+    login_as(article_user)
+
     visit edit_business_article_path(article_business, article_one)
+    fill_token_input 'article_contact_tokens', with: "art@test.com Art Mills"
+    click_button "Update article"
+    
+    within(".contacts") do
+      check_content "Art Mills",
+                    "art@test.com"
+                    
+    end    
+  end
+  
+  test "update article to remove existing contact" do
+    
   end
   
 end
