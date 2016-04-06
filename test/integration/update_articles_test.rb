@@ -25,6 +25,22 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     articles(:article_two)
   end
   
+  def contact_business
+    businesses(:contact_business)
+  end
+  
+  def contact_user
+    users(:contact_user)
+  end
+  
+  def contact_article_two
+    articles(:contact_article_two)
+  end
+  
+  def contact_three
+    contacts(:contact_three)
+  end
+  
   test "update article from article index" do
     visit business_articles_path(article_business)
     find(:linkhref, edit_business_article_path(article_business, article_one)).click 
@@ -111,7 +127,17 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
   end
   
   test "update article to remove existing contact" do
+    logout
+    Capybara.current_driver = :poltergeist
+    login_as(contact_user)
+    visit edit_business_article_path(contact_business, contact_article_two)
+    Capybara.ignore_hidden_elements = false
+    find(:css, ".token-input-delete-token-facebook").click
+    clear_token_input("article_contact_tokens")
     
+    click_button "Update article"
+   
+    refute_content contact_three.name
   end
   
 end

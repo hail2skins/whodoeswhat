@@ -5,4 +5,9 @@ module TokenInputHelper
     sleep(5)
     find(:xpath, "//div[@class='token-input-dropdown-facebook']/ul/li[contains(string(),'#{options[:with]}')]").click
   end
+  
+  def clear_token_input(id, options={})
+    page.driver.execute_script("$('##{id}').tokenInput('remove', #{options.to_json})")
+    sleep(0.1)
+  end
 end

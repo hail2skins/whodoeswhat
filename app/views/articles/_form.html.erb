@@ -14,9 +14,7 @@
   <%= content_tag "div", id: "contacts", data: { url: business_contacts_url(@business) } do %>
 
     <h3>Business Contacts</h3>
-    
       <%= f.input :contact_tokens, label: "Contacts", input_html: { data: { load: @article.contacts } } %>
-    
   <% end %>
 
   <%= f.button :submit, class: "btn btn-primary" %>
