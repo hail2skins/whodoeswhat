@@ -192,13 +192,13 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
                               I will make it work.   
                               I demand it to work.
                               Or I shall die."
-    fill_token_input 'article_contact_tokens', with: "art@test.com Art Mills"
-    fill_token_input 'article_contact_tokens', with: "jonathan@test.com Jonathan Engstrom"
+    fill_token_input 'article_contact_tokens', with: "art1@test.com Art Mills"
+    fill_token_input 'article_contact_tokens', with: "jonathan1@test.com Jonathan Engstrom"
     click_button "Create article"
     
     within(".contacts") do
-      check_content "Art Mills, art@test.com",
-                    "Jonathan Engstrom, jonathan@test.com"
+      check_content "Art Mills, art1@test.com",
+                    "Jonathan Engstrom, jonathan1@test.com"
     end
     
   end
