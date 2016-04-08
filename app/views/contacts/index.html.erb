@@ -24,11 +24,11 @@
           <td><%= contact.last_name %></td>
           <td><%= link_to contact.email, business_contact_path(@business, contact) %></td>
           <td><%= contact.articles.count %></td>
-          <td><%= link_to "Edit", [:edit, @business, contact], class: "btn btn-primary" %></td>
+          <td><%= link_to "Edit", [:edit, @business, contact], class: " edit" %></td>
           <td><%= link_to "Delete", business_contact_path(@business, contact), 
                                     method: :delete,
                                     data: { confirm: "Are you sure you want to delete this task?" },
-                                    class: "btn btn-danger" %></td>
+                                    class: "delete" %></td>
         </tr>
         <% end %>
       </tbody>

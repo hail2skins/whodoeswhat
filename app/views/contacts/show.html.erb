@@ -5,6 +5,7 @@
   <div class="panel panel-info">
     <div class="panel-heading clearfix">
       <%= @business.name + " Contact" %>
+      <%= link_to "Edit Contact", edit_business_contact_path(@business, @contact), class: "edit pull-right" %>
     </div>
     <div class="panel-body">
       <table class="table table-user-information">

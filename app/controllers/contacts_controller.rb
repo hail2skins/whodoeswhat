@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_action :get_business  
-  before_action :set_contact, only: [ :show ]
+  before_action :set_contact, only: [ :show, :edit, :update, :delete ]
   
   def index
     @contacts = @business.contacts
@@ -26,6 +26,19 @@ class ContactsController < ApplicationController
       else
         format.html { render 'new' }
       end
+    end
+  end
+  
+  def edit
+  end
+  
+  def update
+    if @contact.update(contact_params)
+      flash[:notice] = "Contact has been updated."
+      redirect_to [@business, @contact]
+    else
+      flash.now[:alert] = "Contact has not been updated."
+      render "edit"
     end
   end
   
