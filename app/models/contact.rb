@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
   
-  has_many :article_contacts
+  has_many :article_contacts, dependent: :destroy
   has_many :articles, through: :article_contacts
   belongs_to :business, required: false
   

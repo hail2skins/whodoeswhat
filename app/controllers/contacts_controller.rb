@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_action :get_business  
-  before_action :set_contact, only: [ :show, :edit, :update, :delete ]
+  before_action :set_contact, only: [ :show, :edit, :update, :destroy ]
   
   def index
     @contacts = @business.contacts
@@ -41,6 +41,12 @@ class ContactsController < ApplicationController
       render "edit"
     end
   end
+  
+  def destroy
+    @contact.destroy
+    flash[:notice] = "Contact has been deleted."
+    redirect_to business_contacts_path(@business)
+  end    
   
   private
     def get_business
