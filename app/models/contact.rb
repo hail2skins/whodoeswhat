@@ -4,6 +4,8 @@ class Contact < ApplicationRecord
   has_many :articles, through: :article_contacts
   belongs_to :business, required: false
   
+  validates_uniqueness_of :email
+  
   def name
 	  "#{first_name} #{last_name}".to_s
   end

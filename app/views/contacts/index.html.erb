@@ -2,6 +2,7 @@
 <div class="row">
   <div class="col-lg-6">
     <h1>Contact List</h1>
+    <%= link_to "New Contact", new_business_contact_path(@business), class: 'new' %>
     <% if @contacts.empty? %>
       <p>No contacts have been associated with any knowledge articles yet.</p>
     <% else %>
