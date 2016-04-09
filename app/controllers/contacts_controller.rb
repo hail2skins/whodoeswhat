@@ -4,6 +4,8 @@ class ContactsController < ApplicationController
   
   def index
     @contacts = @business.contacts
+    authorize @contacts
+
     respond_to do |format|
       format.html
       format.json { render json: @contacts.tokens(params[:q]) }
@@ -11,6 +13,7 @@ class ContactsController < ApplicationController
   end
   
   def show
+    authorize @contact
   end
   
   def new
@@ -19,6 +22,7 @@ class ContactsController < ApplicationController
   
   def create
     @contact = @business.contacts.build(contact_params)
+    authorize @contact
 
     respond_to do |format|
       if @contact.save
@@ -30,9 +34,11 @@ class ContactsController < ApplicationController
   end
   
   def edit
+    authorize @business
   end
   
   def update
+    authorize @contact
     if @contact.update(contact_params)
       flash[:notice] = "Contact has been updated."
       redirect_to [@business, @contact]
@@ -43,6 +49,7 @@ class ContactsController < ApplicationController
   end
   
   def destroy
+    authorize @contact
     @contact.destroy
     flash[:notice] = "Contact has been deleted."
     redirect_to business_contacts_path(@business)
