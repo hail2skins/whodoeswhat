@@ -45,4 +45,35 @@ class PolicyContactTest < ActionDispatch::IntegrationTest
     assert_equal root_path, current_path
     check_content "You aren't allowed to do that."    
   end  
+
+  test "another user can not see contact index" do
+    login_as(login_user)
+    visit business_contacts_path(contact_business)
+    assert_equal user_path(login_user), current_path
+    check_content "You aren't allowed to do that."
+  end
+  
+  test "another user can not see contact show" do
+    login_as(login_user)
+    visit business_contact_path(contact_business, contact_one)
+    assert_equal user_path(login_user), current_path
+    check_content "You aren't allowed to do that."    
+  end
+  
+  test "another user can not see contact edit" do
+    login_as(login_user)
+    visit edit_business_contact_path(contact_business, contact_one)
+    assert_equal user_path(login_user), current_path
+    check_content "You aren't allowed to do that."    
+  end 
+  
+  test "another user can not create contact" do
+    login_as(login_user)
+    visit new_business_contact_path(contact_business)
+    click_button "Create contact"
+    assert_equal user_path(login_user), current_path
+    check_content "You aren't allowed to do that."    
+  end  
+  
+
 end
