@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   
   def index
     @contacts = @business.contacts
-    authorize @contacts
+    authorize @business
 
     respond_to do |format|
       format.html

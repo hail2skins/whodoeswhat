@@ -10,7 +10,7 @@ class ContactPolicy < ApplicationPolicy
   end
   
   def show?
-    Pundit.policy!(user, record.business).show?
+    user.present? && user.groups.find_by(name: "#{record.business.name} Admin")
   end
   
   def create?
