@@ -202,6 +202,25 @@ class CreateArticlesTest < ActionDispatch::IntegrationTest
     end
     
   end
-  
+
+  test "create article with a single tag" do
+    logout
+    Capybara.current_driver = :poltergeist
+    login_as(users(:article_user))
+    visit new_business_article_path(businesses(:article_business))
+    fill_in "Title", with: "Single contact test"
+    fill_in "Content", with: "I want this to work.   
+                              I need this to work.   
+                              I will make it work.   
+                              I demand it to work.
+                              Or I shall die."
+    fill_token_input 'article_tag_tokens', with: "Powershell_5"
+    click_button "Create article"
+    
+    within(".tags") do
+      check_content "Powershell_5"
+                    
+    end    
+  end
 
 end
