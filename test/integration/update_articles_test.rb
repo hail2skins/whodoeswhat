@@ -116,12 +116,12 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     login_as(article_user)
 
     visit edit_business_article_path(article_business, article_one)
-    fill_token_input 'article_contact_tokens', with: "art1@test.com Art Mills"
+    fill_token_input 'article_contact_tokens', with: "art111@test.com Art Mills"
     click_button "Update article"
     
     within(".contacts") do
       check_content "Art Mills",
-                    "art1@test.com"
+                    "art111@test.com"
                     
     end    
   end
