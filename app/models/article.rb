@@ -15,8 +15,10 @@ class Article < ApplicationRecord
   accepts_nested_attributes_for :attachments, reject_if: :all_blank
   has_many :article_contacts, dependent: :destroy
   has_many :contacts, through: :article_contacts
+  has_many :article_tags, dependent: :destroy
+  has_many :tags, through: :article_tags
   accepts_nested_attributes_for :contacts, reject_if: proc { |attributes| attributes.any? {|k,v| v.blank?} }
-  attr_reader :contact_tokens
+  attr_reader :contact_tokens, :tag_tokens
   
 
   validates :name, presence: true
@@ -24,6 +26,10 @@ class Article < ApplicationRecord
   
   def contact_tokens=(tokens)
     self.contact_ids = Contact.ids_from_tokens(tokens)
+  end
+  
+  def tag_tokens=(tokens)
+    self.tag_ids = Tag.ids_from_tokens(tokens)
   end
  
   

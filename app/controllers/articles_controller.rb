@@ -85,6 +85,7 @@ class ArticlesController < ApplicationController
                                       :content,
                                       :_destroy,
                                       :contact_tokens,
+                                      :tag_tokens,
                                       contacts_attributes: [:first_name, :last_name, :email, :_destroy],
                                       attachments_attributes: [:file, :file_cache, :_destroy])
     end

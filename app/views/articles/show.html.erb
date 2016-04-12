@@ -16,7 +16,9 @@
     </div>
     <div class="panel-body">
       <%= markdown(@article.content) %>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+    <div class="tags panel-footer">
+      Tags: <%= raw @article.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
     </div>
   </div>
 </div>

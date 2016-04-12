@@ -9,11 +9,19 @@ ready = ->
 $(document).ready(ready)
 $(document).on('page:load', ready)
 
-token = ->
+contactToken = ->
   $('#article_contact_tokens').tokenInput $('#contacts').data('url'),
     theme: 'facebook'
     prePopulate: $('#article_contact_tokens').data('load')
     propertyToSearch: "email"
     
-$(document).ready(token)
-$(document).on('page:load', token)
+$(document).ready(contactToken)
+$(document).on('page:load', contactToken)
+
+tagToken = ->
+  $('#article_tag_tokens').tokenInput $('#tags').data('url'),
+    theme: 'facebook'
+    prePopulate: $('#article_tag_tokens').data('load')
+
+$(document).ready(tagToken)
+$(document).on('page:load', tagToken)

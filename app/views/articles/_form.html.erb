@@ -1,7 +1,12 @@
 <%= simple_form_for([@business, @article]) do |f| %>
   <%= f.input :name, label: "Title" %>
   <%= f.input :content %>
-  <%= f.error :content_count, class: "alert-error" %>
+  <%= content_tag "div", id: "tags", data: { url: tags_url } do %>
+
+      <%= f.input :tag_tokens, label: "Tags", input_html: { data: { load: @article.tags } } %>
+  <% end %> 
+ 
+ 
   <div id="attachments">  
     <h3>Attachments</h3>
     <%= f.simple_fields_for :attachments do |attachment| %>
