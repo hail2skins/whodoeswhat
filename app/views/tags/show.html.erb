@@ -1,0 +1,4 @@
+<h2><%= @tag.name %></h2>
+<% @tag.articles.each do |article| %>
+  <%= link_to article.name, business_article_path(article.business, article) %>
+<% end %>
