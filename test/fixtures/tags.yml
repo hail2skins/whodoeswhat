@@ -1,8 +1,8 @@
 # Read about fixtures at
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
+tag_one:
+  name: Rails
 
-two:
-  name: MyString
+tag_two:
+  name: Powershell

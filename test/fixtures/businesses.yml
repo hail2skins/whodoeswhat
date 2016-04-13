@@ -22,4 +22,8 @@ attachment_business:
 
 contact_business:
   name: "Contact Business"
+  
+tag_business:
+  name: "Tag Business"
+
 

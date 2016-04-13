@@ -32,5 +32,10 @@ contact_group:
   name: "Contact Business Admin"
   description: "Nothing interesting"
   business: contact_business
+  
+tag_group:
+  name: "Tag Business Admin"
+  description: "Nothing interesting"
+  business: tag_business
 
 

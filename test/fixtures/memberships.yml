@@ -27,3 +27,7 @@ attachment_membership:
 contact_membership:
   user: contact_user
   group: contact_group
+  
+tag_membership:
+  user: tag_user
+  group: tag_group

@@ -43,3 +43,12 @@ contact_article_three:
   content: "I have to test 20 words or this will not work how I want so I am typing a lot here to make sure I am over 20 words and that's all I'm doing."
   business: contact_business
   
+tag_article_one:
+  name: "First tag article"
+  content: "I have to test 20 words or this will not work how I want so I am typing a lot here to make sure I am over 20 words and that's all I'm doing."
+  business: tag_business  
+
+tag_article_two:
+  name: "Second tag article"
+  content: "I have to test 20 words or this will not work how I want so I am typing a lot here to make sure I am over 20 words and that's all I'm doing."
+  business: tag_business  

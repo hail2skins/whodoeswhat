@@ -49,3 +49,7 @@ attachment_user:
 contact_user:
   email: 'contact@user.com'
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+tag_user:
+  email: 'tag@user.com'
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

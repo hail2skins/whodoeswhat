@@ -2,9 +2,13 @@
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  article: 
-  tag: 
+  article: tag_article_one
+  tag: tag_one
 
 two:
-  article: 
-  tag: 
+  article: tag_article_one
+  tag: tag_two
+  
+three:
+  article: tag_article_two
+  tag: tag_one
