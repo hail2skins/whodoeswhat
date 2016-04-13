@@ -20,7 +20,7 @@
       <%= markdown(@article.content) %>
     </div>
     <div class="tags panel-footer">
-      Tags: <%= raw @article.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
+      Tags: <%= raw @article.tags.map(&:name).map { |t| link_to t, business_tag_path(@business, t) }.join(', ') %>
     </div>
   </div>
 </div>

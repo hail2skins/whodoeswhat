@@ -1,7 +1,9 @@
 <h2><%= @tag.name %></h2>
-<% if request.referrer.include? "articles" %>
-  <% @tag.articles.each do |article| %>
+
+  <% @articles.each do |article| %>
     <%= link_to article.name, business_article_path(article.business, article) %>
   <% end %>
-<% end %>
+  
+
+
 

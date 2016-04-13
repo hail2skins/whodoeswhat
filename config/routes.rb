@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   
   resources :businesses do
+    resources :tags
     resources :groups
     resources :articles
     resources :contacts
