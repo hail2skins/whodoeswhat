@@ -41,6 +41,22 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     contacts(:contact_three)
   end
   
+  def tag_user
+    users(:tag_user)
+  end
+  
+  def tag_business
+    businesses(:tag_business)
+  end
+  
+  def tag_article_two
+    articles(:tag_article_two)
+  end
+  
+  def tag_two
+    tags(:tag_two)
+  end
+  
   test "update article from article index" do
     visit business_articles_path(article_business)
     find(:linkhref, edit_business_article_path(article_business, article_one)).click 
@@ -133,11 +149,37 @@ class UpdateArticlesTest < ActionDispatch::IntegrationTest
     visit edit_business_article_path(contact_business, contact_article_two)
     Capybara.ignore_hidden_elements = false
     find(:css, ".token-input-delete-token-facebook").click
-    clear_token_input("article_contact_tokens")
+    #clear_token_input("article_contact_tokens")
     
     click_button "Update article"
    
     refute_content contact_three.name
   end
   
+  test "update article without a tag to have a tag" do
+    logout
+    Capybara.current_driver = :poltergeist
+    login_as(article_user)
+
+    visit edit_business_article_path(article_business, article_one)
+    fill_token_input 'article_tag_tokens', with: "yellow"
+    click_button "Update article"    
+
+    check_content "Tags: yellow"
+    check_links "yellow"
+  end
+  
+  test "update article with a tag to have no tags" do
+    logout
+    Capybara.current_driver = :poltergeist
+    login_as(tag_user)
+    
+    visit edit_business_article_path(tag_business, tag_article_two)
+    find(:css, ".token-input-delete-token-facebook").click
+    #clear_token_input("article_tag_tokens")
+    click_button "Update article"
+    
+    refute_content tag_two.name
+    
+  end
 end

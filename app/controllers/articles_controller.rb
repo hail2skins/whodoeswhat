@@ -53,6 +53,7 @@ class ArticlesController < ApplicationController
     authorize @business
     if @article.update(article_params)
       confirm_contact_tokens
+      confirm_tag_tokens
       flash[:notice] = "Article has been updated."
       redirect_to [@business, @article]
     else
@@ -102,6 +103,13 @@ class ArticlesController < ApplicationController
       if @article.contacts.any? && !params[:article][:contact_tokens]
         article_contact = ArticleContact.find_by(article_id: @article.id, contact_id: @article.contacts.first.id)
         article_contact.destroy
+      end
+    end
+    
+    def confirm_tag_tokens
+      if @article.tags.any? && !params[:article][:tag_tokens]
+        article_tag = ArticleTag.find_by(article_id: @article.id, tag_id: @article.tags.first.id)
+        article_tag.destroy
       end
     end
     
