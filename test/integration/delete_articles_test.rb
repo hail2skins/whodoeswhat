@@ -48,6 +48,18 @@ class DeleteArticlesTest < ActionDispatch::IntegrationTest
   def attachment_article
     articles(:attachment_article)
   end
+  
+  def tag_user
+    users(:tag_user)
+  end
+  
+  def tag_business
+    businesses(:tag_business)
+  end
+  
+  def tag_article_one
+    articles(:tag_article_one)
+  end
 
   test "delete an article from articles index" do
     visit business_articles_path(article_business)
@@ -86,5 +98,15 @@ class DeleteArticlesTest < ActionDispatch::IntegrationTest
     check_content "Article has been deleted."
     refute_content attachment_article.name
   end  
+  
+  test "delete an article with an associated tag" do
+    logout
+    login_as(tag_user)
+    visit business_article_path(tag_business, tag_article_one)
+    click_link "Delete"
+    
+    check_content "Article has been deleted."
+    refute_content tag_article_one.name
+  end
    
 end
