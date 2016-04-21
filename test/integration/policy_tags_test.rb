@@ -28,6 +28,7 @@ class PolicyTagsTest < ActionDispatch::IntegrationTest
   end
   
   test "another user can not see tag show for other business" do
+    login_as(login_user)
     visit business_tag_path(tag_business, tag_one.name)
     assert_equal root_path, current_path
     check_content "You aren't allowed to do that."
