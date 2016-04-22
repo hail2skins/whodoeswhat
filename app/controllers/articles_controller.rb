@@ -63,6 +63,7 @@ class ArticlesController < ApplicationController
   end
   
   def destroy
+    authorize @business
     @article.destroy
     flash[:notice] = "Article has been deleted."
     redirect_to business_articles_path(@business)
