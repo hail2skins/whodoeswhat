@@ -25,6 +25,7 @@ class TagPolicyTest < PolicyAssertions::Test
     refute_permit nil, tag_one
     refute_permit login_user, tag_one
     assert_permit tag_user, tag_one
+    
   end
 
   def test_create
